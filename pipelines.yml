@@ -3,12 +3,16 @@ pipelines:
     steps:
       - name: step_1
         type: bash
+        configuration:
+          nodePool: ankul_nodes
         execution:
           onExecute:
             - sleep 1
    
       - name: step_2
         type: bash
+        configuration:
+          nodePool: ankul_nodes        
         triggeredBy:
           steps:
             - step_1
@@ -18,6 +22,8 @@ pipelines:
 
       - name: step_3
         type: bash
+        configuration:
+          nodePool: ankul_nodes        
         triggeredBy:
           steps:
             - step_1        
@@ -27,6 +33,8 @@ pipelines:
    
       - name: step_4
         type: bash
+        configuration:
+          nodePool: ankul_nodes        
         triggeredBy:
           steps:
             - step_2
