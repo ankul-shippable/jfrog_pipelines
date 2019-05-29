@@ -23,7 +23,7 @@ pipelines:
             - step_1        
         execution:
           onExecute:
-            - sleep 60
+            - sleep 120
    
       - name: step_4
         type: bash
