@@ -5,7 +5,7 @@ pipelines:
         type: bash
         execution:
           onExecute:
-            - sleep 180
+            - sleep 1
    
       - name: step_2
         type: bash
@@ -14,7 +14,7 @@ pipelines:
             - step_1
         execution:
           onExecute:
-            - sleep 180
+            - sleep 10
 
       - name: step_3
         type: bash
@@ -23,7 +23,7 @@ pipelines:
             - step_1        
         execution:
           onExecute:
-            - sleep 180
+            - sleep 60
    
       - name: step_4
         type: bash
@@ -33,4 +33,4 @@ pipelines:
             - step_3
         execution:
           onExecute:
-            - sleep 180
+            - sleep 1
