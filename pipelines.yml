@@ -1,5 +1,5 @@
 resources:
-  - name: invalid_yml
+  - name: aql_invalid_yml
     type: aql
     version:
       query: something
@@ -29,7 +29,7 @@ pipelines:
           resources:
             - valid_1
             - valid_2
-            - invalid_yml
+            - aql_invalid_yml
         execution:
           onExecute:
             - sleep 1
