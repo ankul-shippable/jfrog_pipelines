@@ -11,7 +11,6 @@ resources:
     type: releaseBundle
     version:
       name: something
-      version: asdsa23
       
   - name: valid_2
     type: releaseBundle
@@ -26,7 +25,11 @@ pipelines:
       - name: step_1
         type: bash
         configuration:
-          nodePool: ankul_nodes
+          nodePool: ankul_nodes  
+        requires:
+          resources:
+            - valid_1
+            - valid_2
         execution:
           onExecute:
             - sleep 1
