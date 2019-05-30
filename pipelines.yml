@@ -3,7 +3,9 @@ resources:
     type: aql
     version:
       query: something
-      addedProperties: asdsad
+      addedProperties:
+        ENV1: VALUE1
+        ENV2: VALUE2
       
   - name: valid_1
     type: releaseBundle
