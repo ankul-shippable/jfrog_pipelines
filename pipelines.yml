@@ -3,7 +3,7 @@ resources:
     type: aql
     version:
       query: something
-      sdad: asdsad
+      addedProperties: asdsad
       
   - name: valid_1
     type: releaseBundle
