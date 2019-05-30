@@ -6,7 +6,8 @@ resources:
       addedProperties:
         ENV1: VALUE1
         ENV2: VALUE2
-      mappings: asda
+      mappings:
+        mapping0: asa
       
   - name: valid_1
     type: releaseBundle
