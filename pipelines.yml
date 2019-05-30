@@ -1,3 +1,25 @@
+resources:
+  - name: invalid_yml
+    type: releaseBundle
+    version:
+      name: something
+      version: 12
+      isSigned: 213
+      dsaas: 123
+      
+  - name: valid_1
+    type: releaseBundle
+    version:
+      name: something
+      version: asdsa23
+      
+  - name: valid_2
+    type: releaseBundle
+    version:
+      name: something
+      version: asdsa23
+      isSigned: true
+
 pipelines:
   - name: ankul_pipeline_2
     steps:
@@ -8,37 +30,4 @@ pipelines:
         execution:
           onExecute:
             - sleep 1
-   
-      - name: step_2
-        type: bash
-        configuration:
-          nodePool: ankul_nodes        
-        triggeredBy:
-          steps:
-            - step_1
-        execution:
-          onExecute:
-            - sleep 10
-
-      - name: step_3
-        type: bash
-        configuration:
-          nodePool: ankul_nodes        
-        triggeredBy:
-          steps:
-            - step_1        
-        execution:
-          onExecute:
-            - sleep 120
-   
-      - name: step_4
-        type: bash
-        configuration:
-          nodePool: ankul_nodes        
-        triggeredBy:
-          steps:
-            - step_2
-            - step_3
-        execution:
-          onExecute:
-            - sleep 1
+ 
