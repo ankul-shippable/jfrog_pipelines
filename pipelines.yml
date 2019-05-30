@@ -7,7 +7,9 @@ resources:
         ENV1: VALUE1
         ENV2: VALUE2
       mappings:
-        mapping0: asa
+        mapping0:
+          input: asda
+          output: asdsada
       
   - name: valid_1
     type: releaseBundle
