@@ -2,10 +2,8 @@ resources:
   - name: invalid_yml
     type: aql
     version:
-      name: something
-      version: abc
-      isSigned: false
-      dsaas: 123
+      query: something
+      sdad: asdsad
       
   - name: valid_1
     type: releaseBundle
