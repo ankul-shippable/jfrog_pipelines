@@ -10,6 +10,19 @@ resources:
         mapping0:
           input: asda
           output: asdsada
+          
+  - name: aql_2
+    type: aql
+    version:
+      query: items({})
+      addedProperties:
+        ENV1: VALUE1
+        ENV2: VALUE2
+      mappings:
+        mapping0:
+          input: asda
+          output: asdsada
+          
 
 pipelines:
   - name: ankul_pipeline
@@ -27,6 +40,7 @@ pipelines:
             - bash
           resources:
             - aql
+            - aql_2
           integrations:
             - ankul_github
             - ankul_artifactory
