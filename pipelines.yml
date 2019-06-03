@@ -25,6 +25,8 @@ pipelines:
         requires:
           steps:
             - bash
+          resources:
+            - aql
           integrations:
             - ankul_github
             - ankul_artifactory
