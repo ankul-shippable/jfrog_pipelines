@@ -25,3 +25,5 @@ pipelines:
         requires:
           steps:
             - bash
+          integrations:
+            - ankul_github
