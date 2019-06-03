@@ -1,15 +1,15 @@
 resources:
-#   - name: aql_invalid_yml
-#     type: aql
-#     version:
-#       query: something
-#       addedProperties:
-#         ENV1: VALUE1
-#         ENV2: VALUE2
-#       mappings:
-#         mapping0:
-#           input: asda
-#           output: asdsada
+  - name: aql
+    type: aql
+    version:
+      query: items({})
+      addedProperties:
+        ENV1: VALUE1
+        ENV2: VALUE2
+      mappings:
+        mapping0:
+          input: asda
+          output: asdsada
 
 pipelines:
   - name: ankul_pipeline
