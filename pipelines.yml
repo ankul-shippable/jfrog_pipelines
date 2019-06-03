@@ -23,6 +23,12 @@ resources:
           input: asda
           output: asdsada
           
+  - name: buildinfo_1
+    type: buildInfo
+    version:
+      buildName: some
+      buildNumber: 1
+                    
 
 pipelines:
   - name: ankul_pipeline
@@ -41,6 +47,7 @@ pipelines:
           resources:
             - aql
             - aql_2
+            - buildinfo_1
           integrations:
             - ankul_github
             - ankul_artifactory
