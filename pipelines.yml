@@ -45,7 +45,7 @@ pipelines:
           onExecute: 
             - echo something
             
-      - name: bundle
+      - name: bundle_2
         type: CreateReleaseBundle
         requires:
           steps:
