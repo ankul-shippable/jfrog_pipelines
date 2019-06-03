@@ -14,5 +14,14 @@ resources:
 pipelines:
   - name: ankul_pipeline
     steps:
-      - name: step_1
+      - name: bash
+        type: bash
+        execution:
+          onExecute: 
+            - echo something
+            
+      - name: bundle
         type: CreateReleaseBundle
+        requires:
+          steps:
+            - bash
