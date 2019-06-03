@@ -28,6 +28,12 @@ resources:
     version:
       buildName: some
       buildNumber: 1
+      
+  - name: releaseBundle_resource
+    type: releaseBundle
+    version:
+      name: test_release
+      version: v1.0.0     
                     
 
 pipelines:
@@ -51,3 +57,5 @@ pipelines:
           integrations:
             - ankul_github
             - ankul_artifactory
+        outputResources:
+          - releaseBundle_resource
