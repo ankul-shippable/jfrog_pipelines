@@ -1,42 +1,18 @@
 resources:
-  - name: aql_invalid_yml
-    type: aql
-    version:
-      query: something
-      addedProperties:
-        ENV1: VALUE1
-        ENV2: VALUE2
-      mappings:
-        mapping0:
-          input: asda
-          output: asdsada
-      
-  - name: valid_1
-    type: releaseBundle
-    version:
-      name: something
-      version: v1.10.0
-      
-  - name: valid_2
-    type: releaseBundle
-    version:
-      name: something
-      version: asdsa23
-      isSigned: true
+#   - name: aql_invalid_yml
+#     type: aql
+#     version:
+#       query: something
+#       addedProperties:
+#         ENV1: VALUE1
+#         ENV2: VALUE2
+#       mappings:
+#         mapping0:
+#           input: asda
+#           output: asdsada
 
 pipelines:
-  - name: ankul_pipeline_2
+  - name: ankul_pipeline
     steps:
       - name: step_1
-        type: bash
-        configuration:
-          nodePool: ankul_nodes  
-        requires:
-          resources:
-            - valid_1
-            - valid_2
-            - aql_invalid_yml
-        execution:
-          onExecute:
-            - sleep 1
- 
+        type: CreateReleaseBundle
