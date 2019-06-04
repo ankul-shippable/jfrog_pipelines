@@ -25,7 +25,7 @@ pipelines:
             - inReleaseBundle
         execution:
           onSuccess:
-            - cat $STEP_TMP_DIR/curl_res_body
+#             - cat $STEP_TMP_DIR/curl_res_body
             - jq . $STEP_TMP_DIR/curl_res_body
         outputResources:
           - outReleaseBundle            
