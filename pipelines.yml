@@ -30,5 +30,5 @@ pipelines:
             - printenv
             - cat $STEP_JSON_PATH
             - export aqlResName=aql_res
-            - addedProperties=$(jq -r ".resources."$aqlResName".addedProperties" $STEP_JSON_PATH)
+            - addedProperties=$(jq -r ".resources."$aqlResName".resourceVersionContentPropertyBag.addedProperties" $STEP_JSON_PATH)
             - echo $addedProperties
