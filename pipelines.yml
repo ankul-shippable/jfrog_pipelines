@@ -1,35 +1,17 @@
 resources:
-  - name: aql_res
-    type: aql
+  - name: releaseBundle
+    type: releaseBundle
     version:
-      query: items({})
-      addedProperties:
-        ENV1: VALUE1
-        ENV2: VALUE2
-      mappings:
-        mapping0:
-          input: test_input_0
-          output: test_output_0
-        mapping1:
-          input: test_input_1
-          output: test_output_1                             
+      name: test_2
+      version: v1.0.1                     
 
 pipelines:
-  - name: ankul_pipeline_3
+  - name: ankul_pipelines_4
     steps:
-
-      - name: test_bash_step
-        type: bash
+      - name: signRelesae
+        type: SignReleaseBundle
         configuration:
           nodePool: ankul_nodes
-        requires:
-          resources:
-            - aql_res
-        execution:
-          onExecute:
-            - printenv
-            - cat $STEP_JSON_PATH
-            - export aqlResName=aql_res
-            - addedProperties=$(jq -r ".resources."$aqlResName".resourceVersionContentPropertyBag.addedProperties" $STEP_JSON_PATH)
-            - echo $addedProperties
-            - echo $addedProperties|to_entries[]|{(.key): .value}
+#         requires:
+#           resources:
+#             - releaseBundle
