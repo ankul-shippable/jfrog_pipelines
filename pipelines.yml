@@ -25,7 +25,7 @@ pipelines:
           onComplete:
             - printenv
             - >
-  releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
+              releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
   if [ ! -z "$releaseNotesContent" ] && [ "$releaseNotesContent" != "null" ]; then
     releaseNotes='{}'
     releaseNotes=$(echo $releaseNotes | jq --arg content $releaseNotesContent '. + {content: $content}')
