@@ -8,8 +8,12 @@ resources:
         ENV2: VALUE2
       mappings:
         mapping0:
-          input: asda
-          output: asdsada
+          input: test_input_0
+          output: test_output_0
+        mapping1:
+          input: test_input_1
+          output: test_output_1          
+          
           
   - name: aql_2
     type: aql
