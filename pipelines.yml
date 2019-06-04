@@ -3,8 +3,8 @@ resources:
     type: buildInfo
     version:
       buildName: native_pipeline
-      buildNumber: 29
-      tartgetRepo: demo
+      buildNumber: 8
+      tartgetRepo: docker-local
       
 pipelines:
   - name: ankul_pipeline
