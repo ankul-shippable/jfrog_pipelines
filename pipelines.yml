@@ -23,26 +23,25 @@ pipelines:
             content: "some random content release dasd asdas dasd aasdas"
         execution:
           onStart:
-            - printenv
-            - |
-              payload='{}'
-              echo $payload | jq .
-              echo -e "\npayload above"
-              releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
-              if [ ! -z "$releaseNotesContent" ] && [ "$releaseNotesContent" != "null" ]; then
-                releaseNotes='{}'
-                releaseNotes=$(echo $releaseNotes | jq --arg content "$releaseNotesContent" '. + {content: $content}')
-                echo $releaseNotes | jq .
-                echo -e "\nafter_content"
-                releaseNotesSyntax=$(jq -r ".step.configuration.releaseNotes.syntax" $STEP_JSON_PATH)
-                if [ ! -z "$releaseNotesSyntax" ] && [ "$releaseNotesSyntax" != "null" ]; then
-                  releaseNotes=$(echo $releaseNotes | jq --arg syntax "$releaseNotesSyntax" '. + {syntax: $syntax}')
-                  echo $releaseNotes | jq .
-                  echo -e "\nafter_syntax"
-                fi
-                payload=$(echo $payload | jq --argjson json "$releaseNotes" '.release_notes = $json')
-                echo $payload | jq .
-              fi
+#             - |
+#               payload='{}'
+#               echo $payload | jq .
+#               echo -e "\npayload above"
+#               releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
+#               if [ ! -z "$releaseNotesContent" ] && [ "$releaseNotesContent" != "null" ]; then
+#                 releaseNotes='{}'
+#                 releaseNotes=$(echo $releaseNotes | jq --arg content "$releaseNotesContent" '. + {content: $content}')
+#                 echo $releaseNotes | jq .
+#                 echo -e "\nafter_content"
+#                 releaseNotesSyntax=$(jq -r ".step.configuration.releaseNotes.syntax" $STEP_JSON_PATH)
+#                 if [ ! -z "$releaseNotesSyntax" ] && [ "$releaseNotesSyntax" != "null" ]; then
+#                   releaseNotes=$(echo $releaseNotes | jq --arg syntax "$releaseNotesSyntax" '. + {syntax: $syntax}')
+#                   echo $releaseNotes | jq .
+#                   echo -e "\nafter_syntax"
+#                 fi
+#                 payload=$(echo $payload | jq --argjson json "$releaseNotes" '.release_notes = $json')
+#                 echo $payload | jq .
+#               fi
         requires:
           integrations:
             - ankul_artifactory         
