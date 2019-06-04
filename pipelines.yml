@@ -19,7 +19,7 @@ pipelines:
           dryRun: false
           description: "some random test description"
           releaseNotes:
-            syntax: markdown
+            syntax: plain_text
             content: "some random content release dasd asdas dasd aasdas"
         execution:
           onComplete:
