@@ -3,13 +3,13 @@ resources:
     type: releaseBundle
     version:
       name: test_2
-      version: v1.0.2
+      version: v1.0.4
       
   - name: outReleaseBundle
     type: releaseBundle
     version:
       name: test_2
-      version: v1.0.2         
+      version: v1.0.4         
 
 pipelines:
   - name: ankul_pipelines_4
