@@ -6,6 +6,11 @@ resources:
       buildNumber: 8
       targetRepo: docker-local
       
+  - name: aql
+    type: aql
+    version:
+      query: "items.find({"$and":[{"artifact.module.build.name":{"$eq":"native_pipeline"}},{"artifact.module.build.number":{"$eq":"8"}}]})"      
+      
 pipelines:
   - name: ankul_pipeline
     steps:
@@ -15,17 +20,17 @@ pipelines:
           affinityGroup: test
           nodePool: ankul_nodes
           releaseBundleName: test_2
-          releaseBundleVersion: v1.1.1
+          releaseBundleVersion: v1.1.2
           dryRun: false
           signed: true
           description: "some random test description"
           releaseNotes:
             syntax: markdown
             content: |
-              ### Heading
-
-              * Bullet
-              * Points
+              ## Heading
+              something: 
+                * Bullet
+                * Points
 #         execution:
 #           onStart:
 #             - |
@@ -52,4 +57,4 @@ pipelines:
             - ankul_artifactory         
         triggeredBy:
           resources:
-            - buildInfo
+            - aql
