@@ -21,9 +21,7 @@ pipelines:
         requires:
           integrations:
             - ankul_artifactory
-#           resources:
-#             - inReleaseBundle
-#             - outReleaseBundle            
+          resources:
+            - inReleaseBundle          
         outputResources:
-          - inReleaseBundle
           - outReleaseBundle            
