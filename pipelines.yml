@@ -2,9 +2,9 @@ resources:
   - name: buildInfo
     type: buildInfo
     version:
-      buildName: test
-      buildNumber: 17
-      tartgetRepo: docker-local
+      buildName: native_pipeline
+      buildNumber: 29
+      tartgetRepo: demo
       
 pipelines:
   - name: ankul_pipeline
