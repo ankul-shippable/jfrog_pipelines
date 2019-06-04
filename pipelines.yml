@@ -1,31 +1,25 @@
-resources:
-  - name: inReleaseBundle
-    type: releaseBundle
+resources:      
+  - name: buildInfo
+    type: buildInfo
     version:
-      name: test_2
-      version: v1.0.6
+      buildName: test
+      buildNumber: 17
+      tartgetRepo: docker-local
       
-  - name: outReleaseBundle
-    type: releaseBundle
-    version:
-      name: test_2
-      version: v1.0.6         
-
 pipelines:
-  - name: ankul_pipelines_4
+  - name: ankul_pipeline
     steps:
-      - name: signRelesae
-        type: SignReleaseBundle
+      - name: bundle
+        type: CreateReleaseBundle
         configuration:
-          nodePool: ankul_nodes      
+          affinityGroup: test
+          nodePool: ankul_nodes
+          releaseBundleName: test_2
+          releaseBundleVersion: v1.0.7
+          dryRun: false
         requires:
           integrations:
-            - ankul_artifactory
+            - ankul_artifactory         
+        triggeredBy:
           resources:
-            - inReleaseBundle
-        execution:
-          onSuccess:
-#             - cat $STEP_TMP_DIR/curl_res_body
-            - jq . $STEP_TMP_DIR/curl_res_body
-        outputResources:
-          - outReleaseBundle            
+            - buildInfo
