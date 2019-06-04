@@ -17,6 +17,7 @@ pipelines:
           releaseBundleName: test_2
           releaseBundleVersion: v1.1.0
           dryRun: false
+          signed: true
           description: "some random test description"
           releaseNotes:
             syntax: markdown
