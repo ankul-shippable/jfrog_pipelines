@@ -12,54 +12,18 @@ resources:
           output: test_output_0
         mapping1:
           input: test_input_1
-          output: test_output_1          
-          
-          
-  - name: aql_2
-    type: aql
-    version:
-      query: items({})
-      addedProperties:
-        ENV1: VALUE1
-        ENV2: VALUE2
-      mappings:
-        mapping0:
-          input: asda
-          output: asdsada
-          
-  - name: buildinfo_1
-    type: buildInfo
-    version:
-      buildName: some
-      buildNumber: 1
-      
-  - name: releaseBundle_resource
-    type: releaseBundle
-    version:
-      name: test_release
-      version: v1.0.0     
-                    
+          output: test_output_1                             
 
 pipelines:
   - name: ankul_pipeline
     steps:
-      - name: bash
+
+      - name: test_bash_step
         type: bash
-        execution:
-          onExecute: 
-            - echo something
-            
-      - name: bundle_2
-        type: CreateReleaseBundle
         requires:
-          steps:
-            - bash
           resources:
             - aql
-            - aql_2
-            - buildinfo_1
-          integrations:
-            - ankul_github
-            - ankul_artifactory
-        outputResources:
-          - releaseBundle_resource
+        execution:
+          onExecute:
+            - printenv
+            - cat $STEP_JSON_PATH
