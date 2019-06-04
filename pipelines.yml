@@ -32,4 +32,4 @@ pipelines:
             - export aqlResName=aql_res
             - addedProperties=$(jq -r ".resources."$aqlResName".resourceVersionContentPropertyBag.addedProperties" $STEP_JSON_PATH)
             - echo $addedProperties
-            - echo $addedProperties | to_entries[] | {(.key): .value}
+            - echo $addedProperties|to_entries[]|{(.key): .value}
