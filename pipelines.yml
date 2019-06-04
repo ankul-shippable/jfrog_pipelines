@@ -93,3 +93,18 @@ pipelines:
             - info
         outputResources:
           - promoteInfo
+          
+      - name: bundle
+        type: CreateReleaseBundle
+        configuration:
+          affinityGroup: test
+          nodePool: ankul_nodes
+          releaseBundleName: test_2
+          releaseBundleVersion: v1.0.7
+          dryRun: false
+        requires:
+          integrations:
+            - ankul_artifactory         
+        triggeredBy:
+          resources:
+            - promoteInfo
