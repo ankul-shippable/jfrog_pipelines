@@ -17,6 +17,9 @@ pipelines:
           releaseBundleName: test_2
           releaseBundleVersion: v1.0.7
           dryRun: false
+        execution:
+          onComplete:
+            - printenv
         requires:
           integrations:
             - ankul_artifactory         
