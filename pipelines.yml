@@ -15,11 +15,11 @@ pipelines:
           affinityGroup: test
           nodePool: ankul_nodes
           releaseBundleName: test_2
-          releaseBundleVersion: v1.0.9
+          releaseBundleVersion: v1.1.0
           dryRun: false
           description: "some random test description"
           releaseNotes:
-            syntax: plain_text
+            syntax: markdown
             content: |
               ### Heading
 
