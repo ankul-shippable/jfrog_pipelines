@@ -17,7 +17,9 @@ pipelines:
       - name: signRelesae
         type: SignReleaseBundle
         configuration:
-          nodePool: ankul_nodes
-#         requires:
+          nodePool: ankul_nodes      
+        requires:
+          integrations:
+            - ankul_github
 #           resources:
 #             - releaseBundle
