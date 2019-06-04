@@ -3,13 +3,13 @@ resources:
     type: releaseBundle
     version:
       name: test_2
-      version: v1.0.4
+      version: v1.0.5
       
   - name: outReleaseBundle
     type: releaseBundle
     version:
       name: test_2
-      version: v1.0.4         
+      version: v1.0.5         
 
 pipelines:
   - name: ankul_pipelines_4
@@ -22,6 +22,10 @@ pipelines:
           integrations:
             - ankul_artifactory
           resources:
-            - inReleaseBundle          
+            - inReleaseBundle
+        execute:
+          onSuccess:
+            - cat $STEP_TMP_DIR/curl_res_body
+            - jq . $STEP_TMP_DIR/curl_res_body
         outputResources:
           - outReleaseBundle            
