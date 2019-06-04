@@ -15,8 +15,21 @@ pipelines:
           affinityGroup: test
           nodePool: ankul_nodes
           releaseBundleName: test_2
-          releaseBundleVersion: v1.0.7
+          releaseBundleVersion: v1.0.8
           dryRun: false
+          description: "some random test description"
+          releaseNotes:
+            syntax: markdown
+            content: "\
+"# Dillinger "\
+"  - Type some Markdown on the left "\
+"  - See HTML in the right "\
+"  - Magic "\
+"```sh "\
+"$ cd dillinger "\
+"$ npm install -d "\
+"$ node app "\
+"``` "\
         execution:
           onComplete:
             - printenv
