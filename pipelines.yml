@@ -21,8 +21,8 @@ pipelines:
           releaseNotes:
             syntax: plain_text
             content: "some random content release dasd asdas dasd aasdas"
-        execution:
-          onStart:
+#         execution:
+#           onStart:
 #             - |
 #               payload='{}'
 #               echo $payload | jq .
