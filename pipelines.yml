@@ -1,5 +1,5 @@
 resources:
-  - name: aql
+  - name: aql_res
     type: aql
     version:
       query: items({})
@@ -15,14 +15,14 @@ resources:
           output: test_output_1                             
 
 pipelines:
-  - name: ankul_pipeline
+  - name: ankul_pipeline_3
     steps:
 
       - name: test_bash_step
         type: bash
         requires:
           resources:
-            - aql
+            - aql_res
         execution:
           onExecute:
             - printenv
