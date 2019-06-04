@@ -1,9 +1,15 @@
 resources:
-  - name: releaseBundle
+  - name: inReleaseBundle
     type: releaseBundle
     version:
       name: test_2
-      version: v1.0.1                     
+      version: v1.0.1   
+      
+  - name: outReleaseBundle
+    type: releaseBundle
+    version:
+      name: test_2
+      version: v1.0.1         
 
 pipelines:
   - name: ankul_pipelines_4
