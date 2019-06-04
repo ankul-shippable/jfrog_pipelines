@@ -31,7 +31,7 @@ pipelines:
               releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
               if [ ! -z "$releaseNotesContent" ] && [ "$releaseNotesContent" != "null" ]; then
                 releaseNotes='{}'
-                releaseNotes=$(echo $releaseNotes | jq --arg content $releaseNotesContent '. + {content: $content}')
+                releaseNotes=$(echo $releaseNotes | jq --arg content "$releaseNotesContent" '. + {content: $content}')
                 echo $releaseNotes | jq .
                 echo -e "\nafter_content"
                 releaseNotesSyntax=$(jq -r ".step.configuration.releaseNotes.syntax" $STEP_JSON_PATH)
