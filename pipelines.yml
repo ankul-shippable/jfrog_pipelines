@@ -15,7 +15,7 @@ pipelines:
           affinityGroup: test
           nodePool: ankul_nodes
           releaseBundleName: test_2
-          releaseBundleVersion: v1.1.0
+          releaseBundleVersion: v1.1.1
           dryRun: false
           signed: true
           description: "some random test description"
