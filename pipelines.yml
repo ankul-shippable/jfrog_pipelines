@@ -20,16 +20,7 @@ pipelines:
           description: "some random test description"
           releaseNotes:
             syntax: markdown
-            content: "\
-"# Dillinger "\
-"  - Type some Markdown on the left "\
-"  - See HTML in the right "\
-"  - Magic "\
-"```sh "\
-"$ cd dillinger "\
-"$ npm install -d "\
-"$ node app "\
-"``` "\
+            content: "some random content release dasd asdas dasd aasdas"
         execution:
           onComplete:
             - printenv
