@@ -24,7 +24,7 @@ pipelines:
         execution:
           onComplete:
             - printenv
-            - >
+            - |
               releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
   if [ ! -z "$releaseNotesContent" ] && [ "$releaseNotesContent" != "null" ]; then
     releaseNotes='{}'
