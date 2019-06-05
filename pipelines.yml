@@ -20,6 +20,12 @@ resources:
         mapping2:
           input: "regex"
           output: "$2/$1"
+  
+  - name: releaseBundle
+    type: releaseBundle
+    version:
+      name: test_2
+      version: v1.1.3
 
 pipelines:
   - name: ankul_pipeline
@@ -38,34 +44,29 @@ pipelines:
             syntax: markdown
             content: |
               ## Heading
-              small description about what this release has
                 * Bullet
                 * Points
         execution:
           onComplete:
             - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
-#             - |
-#               payload='{}'
-#               echo $payload | jq .
-#               echo -e "\npayload above"
-#               releaseNotesContent=$(jq -r ".step.configuration.releaseNotes.content" $STEP_JSON_PATH)
-#               if [ ! -z "$releaseNotesContent" ] && [ "$releaseNotesContent" != "null" ]; then
-#                 releaseNotes='{}'
-#                 releaseNotes=$(echo $releaseNotes | jq --arg content "$releaseNotesContent" '. + {content: $content}')
-#                 echo $releaseNotes | jq .
-#                 echo -e "\nafter_content"
-#                 releaseNotesSyntax=$(jq -r ".step.configuration.releaseNotes.syntax" $STEP_JSON_PATH)
-#                 if [ ! -z "$releaseNotesSyntax" ] && [ "$releaseNotesSyntax" != "null" ]; then
-#                   releaseNotes=$(echo $releaseNotes | jq --arg syntax "$releaseNotesSyntax" '. + {syntax: $syntax}')
-#                   echo $releaseNotes | jq .
-#                   echo -e "\nafter_syntax"
-#                 fi
-#                 payload=$(echo $payload | jq --argjson json "$releaseNotes" '.release_notes = $json')
-#                 echo $payload | jq .
-#               fi
         requires:
           integrations:
             - ankul_artifactory         
         triggeredBy:
           resources:
             - aql
+        outputResources:
+          - releaseBundle
+
+      - name: signRelesae
+        type: SignReleaseBundle
+        configuration:
+          nodePool: ankul_nodes      
+        requires:
+          integrations:
+            - ankul_artifactory
+          resources:
+            - releaseBundle
+        execution:
+          onSuccess:
+            - jq . $STEP_TMP_DIR/curl_res_body
