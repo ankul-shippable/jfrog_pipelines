@@ -35,7 +35,7 @@ pipelines:
                 * Bullet
                 * Points
         execution:
-          onStart:
+          onComplete:
             - cat $STEP_TMP_DIR/curl_res_body
 #             - |
 #               payload='{}'
