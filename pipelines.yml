@@ -56,7 +56,7 @@ pipelines:
           - releaseBundle
         execution:
           onComplete:
-#             - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
+            - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
             - jq -r ".resources.aql.resourceVersionContentPropertyBag.mappings" $step_json_path
 
       - name: signRelease
