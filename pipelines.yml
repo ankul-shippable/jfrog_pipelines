@@ -38,7 +38,7 @@ pipelines:
             syntax: markdown
             content: |
               ## Heading
-              something: 
+              small description about what this release has
                 * Bullet
                 * Points
         execution:
