@@ -10,6 +10,9 @@ resources:
     type: aql
     version:
       query: 'items.find({"$and":[{"artifact.module.build.name":{"$eq":"native_pipeline"}},{"artifact.module.build.number":{"$eq":"8"}}]})'     
+       addedProperties:
+         FOO: "value1a value1b"
+         BAR: "value2a value2b"
       
 pipelines:
   - name: ankul_pipeline
