@@ -47,7 +47,7 @@ pipelines:
                 * Bullet
                 * Points
         execution:
-          onComplete:
+          onFailure:
             - jq -r ".resources.aql.resourceVersionContentPropertyBag" $STEP_JSON_PATH
 #             - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
           
