@@ -17,7 +17,7 @@ resources:
         mapping0:
           input: "regex"
           output: "$1/$2"
-        mapping2:
+        mapping1:
           input: "regex"
           output: "$2/$1"
   
@@ -55,8 +55,9 @@ pipelines:
         outputResources:
           - releaseBundle
         execution:
-          onFailure:
-            - jq -r ".resources.aql.resourceVersionContentPropertyBag" $STEP_JSON_PATH
+          onComplete:
+            - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
+#             - jq -r ".resources.aql.resourceVersionContentPropertyBag" $STEP_JSON_PATH
 
       - name: signRelease
         type: SignReleaseBundle
