@@ -34,8 +34,9 @@ pipelines:
               something: 
                 * Bullet
                 * Points
-#         execution:
-#           onStart:
+        execution:
+          onStart:
+            - cat $STEP_TMP_DIR/curl_res_body
 #             - |
 #               payload='{}'
 #               echo $payload | jq .
