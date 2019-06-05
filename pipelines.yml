@@ -36,7 +36,7 @@ pipelines:
                 * Points
         execution:
           onComplete:
-            - cat $STEP_TMP_DIR/curl_res_body
+            - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
 #             - |
 #               payload='{}'
 #               echo $payload | jq .
