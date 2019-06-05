@@ -65,6 +65,7 @@ pipelines:
         requires:
           integrations:
             - ankul_artifactory
+        triggeredBy:
           resources:
             - releaseBundle
         execution:
