@@ -46,11 +46,6 @@ pipelines:
               ## Heading
                 * Bullet
                 * Points
-        execution:
-          onFailure:
-            - jq -r ".resources.aql.resourceVersionContentPropertyBag" $STEP_JSON_PATH
-#             - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
-          
         requires:
           integrations:
             - ankul_artifactory         
@@ -59,6 +54,9 @@ pipelines:
             - aql
         outputResources:
           - releaseBundle
+        execution:
+          onFailure:
+            - jq -r ".resources.aql.resourceVersionContentPropertyBag" $STEP_JSON_PATH
 
       - name: signRelease
         type: SignReleaseBundle
