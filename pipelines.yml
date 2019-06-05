@@ -49,6 +49,7 @@ pipelines:
         execution:
           onComplete:
             - cat $STEP_TMP_DIR/createReleaseBundlePayload.json
+            - jq -r ".resources.aql.resourceVersionContentPropertyBag.mappings" $STEP_JSON_PATH
         requires:
           integrations:
             - ankul_artifactory         
