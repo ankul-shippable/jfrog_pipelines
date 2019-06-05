@@ -58,7 +58,7 @@ pipelines:
         outputResources:
           - releaseBundle
 
-      - name: signRelesae
+      - name: signRelease
         type: SignReleaseBundle
         configuration:
           nodePool: ankul_nodes      
