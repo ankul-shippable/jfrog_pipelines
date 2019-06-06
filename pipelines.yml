@@ -1,9 +1,8 @@
 resources:   
   - name: sample_node
     type: GitRepo
-    repoPath: ankul-shippable/sample_node
     configuration:
-      gitProvider: ankul_github_2
+#       gitProvider: ankul_github_2
       path: ankul-shippable/sample_node_2
       files:
         include: test.sh
