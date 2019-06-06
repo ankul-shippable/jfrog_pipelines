@@ -8,7 +8,7 @@ resources:
       imageTag: random
 
 pipelines:
-  - name: ankul_pipeline
+  - name: ankul_pipeline_2
     steps:
       - name: test_step
         type: bash
