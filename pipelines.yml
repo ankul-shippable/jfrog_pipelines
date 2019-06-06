@@ -1,5 +1,5 @@
 resources:   
-  - name: sample_node
+  - name: sample_node_2
     type: GitRepo
     configuration:
       gitProvider: ankul_github
