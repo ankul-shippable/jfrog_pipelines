@@ -3,8 +3,8 @@ resources:
     type: GitRepo
     repoPath: ankul-shippable/sample_node
     configuration:
-      gitProvider: ankul_github
-      path: ankul-shippable/sample_node
+      gitProvider: ankul_github_2
+      path: ankul-shippable/sample_node_2
       files:
         include: test.sh
         exclude: random.sh
