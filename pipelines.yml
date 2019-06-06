@@ -1,110 +1,23 @@
-resources:
-  - name: files
-    type: file
-    configuration:
-      integrationName: ankul_artifactory
-    version:
-      pattern: "npm-dev-local/"
-   
+resources:   
   - name: sample_node
-    type: gitRepo
+    type: GitRepo
     repoPath: ankul-shippable/sample_node
     configuration:
-      integrationName: ankul_github
-    version:
-      sha: "master"
-      
-  - name: promoteInfo
-    type: buildInfo
-    version:
-      buildName: bar
-      buildNumber: 2 
-      
-  - name: info
-    type: buildInfo
-    version:
-      buildName: foo
-      buildNumber: 1        
-      
-pipelines:
-  - name: ankul_pipeline
-    steps:
-      - name: build
-        type: build
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        payloadType: docker
-        setup:
-          build:
-            dockerFileLocation: .
-            dockerFileName: Dockerfile
-            imageName: 34.66.110.173:8081/docker-local/ankul
-            imageTag: $PIPELINE_NAME.$RUN_NUMBER
-        requires:
-          integrations:
-            - ankul_artifactory
-          resources:
-            - sample_node
-            - files
-
-      - name: push
-        type: push
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        setup:
-          push:
-            targetRepo: docker-local
-        requires:
-          integrations:
-            - ankul_artifactory
-        triggeredBy:
-          steps:
-            - build
-            
-      - name: publish
-        type: publish
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        requires:
-          integrations:
-            - ankul_artifactory
-        triggeredBy:
-          steps:
-            - push
-        outputResources:
-          - info
-      
-      - name: promote
-        type: promote
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        setup:
-          promote:
-            targetRepo: ankul_local_repo    
-        requires:
-          integrations:
-            - ankul_artifactory         
-        triggeredBy:
-          resources:
-            - info
-        outputResources:
-          - promoteInfo
-          
-      - name: bundle
-        type: CreateReleaseBundle
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-          releaseBundleName: test_2
-          releaseBundleVersion: v1.0.7
-          dryRun: false
-        requires:
-          integrations:
-            - ankul_artifactory         
-        triggeredBy:
-          resources:
-            - promoteInfo
+      gitProvider: ankul_github
+      path: ankul-shippable/sample_node
+      files:
+        include: test.sh
+        exclude: random.sh
+      branches:
+        include: master
+        exclude: random  
+      tags:
+        include: v1.0
+        exclude: v1.1
+      buildOn:
+        commit: true
+        pullRequestCreate: false
+        pullRequestClose: false
+        releaseCreate: false
+        tagCreate: false
+      shallowDepth: 10
