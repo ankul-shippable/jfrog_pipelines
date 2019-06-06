@@ -4,12 +4,11 @@ resources:
     configuration:
       gitProvider: ankul_github
       path: ankul-shippable/sample_node
-      files:
-        include: test.sh
-        exclude: random.sh
+#       files:
+#         include: test.sh
+#         exclude: random.sh
       branches:
         include: master
-        exclude: random  
       tags:
         include: v1.0
         exclude: v1.1
