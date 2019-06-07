@@ -24,7 +24,7 @@ pipelines:
   - name: ankul_pipeline
     steps:
       - name: test_step
-        type: bash
+        type: Bash
         configuration:
           nodePool: ankul_u16_nodes
         triggeredBy:
