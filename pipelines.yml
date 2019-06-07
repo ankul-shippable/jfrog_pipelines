@@ -1,5 +1,5 @@
 resources:   
-  - name: sample_node_2
+  - name: sample_node
     type: GitRepo
     configuration:
       gitProvider: ankul_github
@@ -19,3 +19,17 @@ resources:
         releaseCreate: false
         tagCreate: false
       shallowDepth: 10
+
+pipelines:
+  - name: ankul_pipeline
+    steps:
+      - name: test_step
+        type: bash
+        configuration:
+          nodePool: ankul_u16_nodes
+        triggeredBy:
+          resources:
+            - sample_node
+        execution:
+          onExecute:
+            - echo "executing test bash step..."
