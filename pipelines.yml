@@ -37,6 +37,7 @@ pipelines:
       - name: npm_build
         type: NpmBuild
         configuration:
+          npmArgs: -g
           repositoryName: test_repo
           sourceLocation: .
         requires:
