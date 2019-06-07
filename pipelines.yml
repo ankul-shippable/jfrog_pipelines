@@ -44,3 +44,5 @@ pipelines:
             - ankul_artifactory
           resources:
             - sample_node
+          steps:
+            - test_step
