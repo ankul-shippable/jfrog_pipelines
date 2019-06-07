@@ -33,3 +33,14 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test bash step..."
+
+      - name: npm_build
+        type: NpmBuild
+        configuration:
+          repositoryName: test_repo
+          sourceLocation: .
+        requires:
+          integrations:
+            - ankul_artifactory
+          resources:
+            - sample_node
