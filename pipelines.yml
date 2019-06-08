@@ -22,6 +22,9 @@ pipelines:
           nodePool: ankul_u16_nodes
           inputResources:
             - name: files
+        execution:
+          onExecute:
+            - printenv
 
       - name: npm_build
         type: NpmBuild
