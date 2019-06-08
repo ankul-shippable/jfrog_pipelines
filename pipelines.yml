@@ -35,7 +35,7 @@ pipelines:
         configuration:
 #           npmArgs: -g
           nodePool: ankul_u16_nodes
-          repositoryName: npm-dev-virtual
+          repositoryName: npm-dev-local
           sourceLocation: .
           integrations:
             - name: ankul_artifactory
