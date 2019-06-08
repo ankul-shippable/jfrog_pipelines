@@ -33,7 +33,7 @@ pipelines:
       - name: npm_build
         type: NpmBuild
         configuration:
-          npmArgs: -g
+#           npmArgs: -g
           repositoryName: npm-dev-virtual
           sourceLocation: .
           integrations:
