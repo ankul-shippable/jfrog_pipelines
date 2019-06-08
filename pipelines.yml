@@ -49,8 +49,8 @@ pipelines:
             - sourceLocation=$(jq -r ".step.configuration.sourceLocation" $step_json_path) 
             - add_run_variable ${step_name}_sourceLocation=$sourceLocation
            
-      - name: npm_publish
-        type: NpmPublish
+      - name: npm_publish_bash
+        type: Bash
         configuration:
           repositoryName: ankul-npm-publish
           integrations:
@@ -58,8 +58,10 @@ pipelines:
           inputSteps:
             - name: npm_build
         execution:
-          onSuccess:
+          execution:
             - |
+              export artifactoryIntegrationName="ankul_artifactory"
+              export inputNpmBuildStepName="npm_build"
               echo "[NpmPublish] Authenticating with integration: $artifactoryIntegrationName"
               local rtUrl=$(eval echo "$"int_"$artifactoryIntegrationName"_url)
               local rtUser=$(eval echo "$"int_"$artifactoryIntegrationName"_user)
