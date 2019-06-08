@@ -6,10 +6,23 @@ resources:
       path: ankul-shippable/sample_node
       branches:
         include: master
+        
+  - name: files
+    type: FileSpec
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      pattern: docker-virtual/demo/
 
 pipelines:
   - name: ankul_pipeline
     steps:
+      - name: test_step
+        type: Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputResources:
+            - name: files
+
       - name: npm_build
         type: NpmBuild
         configuration:
@@ -20,6 +33,8 @@ pipelines:
             - name: ankul_artifactory
           inputResources:
             - name: sample_node
+          inputSteps:
+            - name: test_step
            
       - name: npm_publish
         type: NpmPublish
