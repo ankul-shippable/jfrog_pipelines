@@ -50,12 +50,12 @@ pipelines:
               local rtUser=$(eval echo "$"int_"$artifactoryIntegrationName"_user)
               local rtApiKey=$(eval echo "$"int_"$artifactoryIntegrationName"_apikey)
               retry_command jfrog rt config --url $rtUrl --user $rtUser --apikey $rtApiKey --interactive=false
-              buildName=$PIPELINE_NAME
-              buildNumber=$RUN_NUMBER
-              sourceLocation=$(jq -r ".step.configuration.sourceLocation" $STEP_JSON_PATH)
-              repositoryName=$(jq -r ".step.configuration.repositoryName" $STEP_JSON_PATH)
+              buildName=$pipeline_name
+              buildNumber=$run_number
+              sourceLocation=$(jq -r ".step.configuration.sourceLocation" $step_json_path)
+              repositoryName=$(jq -r ".step.configuration.repositoryName" $step_json_path)
               inputGitRepoResourcePath=$(eval echo "$"res_"$inputGitRepoResourceName"_resourcePath)
-              npmArgs=$(jq -r ".step.configuration.npmArgs" $STEP_JSON_PATH)
+              npmArgs=$(jq -r ".step.configuration.npmArgs" $step_json_path)
               if [ -z "$npmArgs" ] || [ "$npmArgs" == "null" ]; then
                 npmArgs=""
               fi
@@ -63,7 +63,7 @@ pipelines:
               echo "[NpmBuild] Changing directory: $inputGitRepoResourcePath/$sourceLocation"
               pushd $inputGitRepoResourcePath/$sourceLocation
                 echo "[NpmBuild] Installing npm packages"
-                echo jfrog rt npm-install $repositoryName --build-name=$buildName --build-number=$buildNumber
+                echo jfrog rt npm-install $repositoryName --build-name=$buildName --build-number=$buildNumber --npm-args=$npmArgs
                 jfrog rt npm-install $repositoryName --build-name=$buildName --build-number=$buildNumber
                 echo "[NpmBuild] Adding build information to run state"
                 add_run_variable buildStepName=${step_name}
