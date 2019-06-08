@@ -35,6 +35,7 @@ pipelines:
             - name: sample_node
           inputSteps:
             - name: test_step
+              trigger: false
            
       - name: npm_publish
         type: NpmPublish
