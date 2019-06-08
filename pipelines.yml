@@ -6,16 +6,6 @@ resources:
       path: ankul-shippable/sample_node
       branches:
         include: master
-      tags:
-        include: v1.0
-        exclude: v1.1
-      buildOn:
-        commit: true
-        pullRequestCreate: false
-        pullRequestClose: false
-        releaseCreate: false
-        tagCreate: false
-      shallowDepth: 10
 
 pipelines:
   - name: ankul_pipeline
