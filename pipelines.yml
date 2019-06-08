@@ -34,7 +34,7 @@ pipelines:
         type: NpmBuild
         configuration:
           npmArgs: -g
-          repositoryName: test_repo
+          repositoryName: npm-dev-virtual
           sourceLocation: .
           integrations:
             - name: ankul_artifactory
@@ -63,7 +63,7 @@ pipelines:
               echo "[NpmBuild] Changing directory: $inputGitRepoResourcePath/$sourceLocation"
               pushd $inputGitRepoResourcePath/$sourceLocation
                 echo "[NpmBuild] Installing npm packages"
-                echo jfrog rt npm-install $repositoryName --build-name=$buildName --build-number=$buildNumber --npm-args=$npmArgs
+                echo jfrog rt npm-install $repositoryName --build-name=$buildName --build-number=$buildNumber --npm-args="$npmArgs"           
                 jfrog rt npm-install $repositoryName --build-name=$buildName --build-number=$buildNumber
                 echo "[NpmBuild] Adding build information to run state"
                 add_run_variable buildStepName=${step_name}
