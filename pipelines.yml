@@ -29,8 +29,6 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test bash step..."
-#           onSuccess:
-#             - echo "success!"
 
       - name: npm_build
         type: NpmBuild
