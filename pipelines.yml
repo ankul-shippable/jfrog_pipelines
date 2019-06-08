@@ -59,6 +59,7 @@ pipelines:
             - name: npm_build
         execution:
           onExecute:
+            - ls $run_dir/workspace
             - |
               export artifactoryIntegrationName="ankul_artifactory"
               export inputNpmBuildStepName="npm_build"
