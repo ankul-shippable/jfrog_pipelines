@@ -70,12 +70,13 @@ pipelines:
               
               local sourceStateName=$(eval echo "$""$inputNpmBuildStepName"_sourceStateName)
 
-              restore_run_state $sourceStateName /tmp/jfrog
+              restore_run_state $sourceStateName /tmp/jfrog/$sourceStateName
               
               sudo apt-get install tree
-              tree /tmp/jfrog
+              tree /tmp/jfrog/$sourceStateName
 
               local buildNumber=$(eval echo "$""$inputNpmBuildStepName"_buildNumber)
               local buildName=$(eval echo "$""$inputNpmBuildStepName"_buildName)
               local sourceLocation=$(eval echo "$""$inputNpmBuildStepName"_sourceLocation)
-#               local repositoryName=$(jq -r ".step.configuration.repositoryName" $step_json_path)
+              local repositoryName="ankul-npm-publish"
+              
