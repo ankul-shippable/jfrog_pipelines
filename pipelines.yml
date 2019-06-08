@@ -91,6 +91,6 @@ pipelines:
                 add_run_variable ${step_name}_buildName=${buildName}
               popd
               jfrog rt bce $buildName $buildNumber
-            - echo $run_dir/workspace/$sourceStateName
-            - rm -rf $run_dir/workspace/$sourceStateName
-            - ls $run_dir/workspace
+              echo $run_dir/workspace/$sourceStateName
+              rm -rf $run_dir/workspace/$sourceStateName
+              ls $run_dir/workspace
