@@ -12,6 +12,7 @@ resources:
     configuration:
       sourceArtifactory: ankul_artifactory
       pattern: docker-virtual/demo/
+      limit: 2
 
 pipelines:
   - name: ankul_pipeline
