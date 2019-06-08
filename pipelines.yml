@@ -43,3 +43,6 @@ pipelines:
             - name: sample_node
           inputSteps:
             - name: test_step
+        execution:
+          onSuccess:
+            - echo "success!"
