@@ -20,8 +20,6 @@ pipelines:
             - name: ankul_artifactory
           inputResources:
             - name: sample_node
-          inputSteps:
-            - name: test_step
            
       - name: npm_publish
         type: NpmPublish
