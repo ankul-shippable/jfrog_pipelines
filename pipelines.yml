@@ -52,7 +52,7 @@ pipelines:
       - name: npm_publish_bash
         type: Bash
         configuration:
-          nodePool: ankuk_u16_nodes
+          nodePool: ankul_u16_nodes
 #           repositoryName: ankul-npm-publish
           integrations:
             - name: ankul_artifactory
