@@ -52,9 +52,9 @@ pipelines:
         configuration:
           repositoryName: npm-dev-local
           integrations:
-            - name: ankul_github
+            - name: ankul_artifactory
           inputSteps:
-            - name: test_step
+            - name: npm_build
         execution:
           onSuccess:
             - echo "success!"
