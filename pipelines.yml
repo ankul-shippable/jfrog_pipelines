@@ -46,3 +46,15 @@ pipelines:
         execution:
           onSuccess:
             - echo "success!"
+           
+      - name: npm_publish
+        type: NpmPublish
+        configuration:
+          repositoryName: npm-dev-local
+          integrations:
+            - name: ankul_github
+          inputSteps:
+            - name: test_step
+        execution:
+          onSuccess:
+            - echo "success!"
