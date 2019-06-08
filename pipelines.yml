@@ -52,13 +52,13 @@ pipelines:
       - name: npm_publish_bash
         type: Bash
         configuration:
-          repositoryName: ankul-npm-publish
+#           repositoryName: ankul-npm-publish
           integrations:
             - name: ankul_artifactory
           inputSteps:
             - name: npm_build
         execution:
-          execution:
+          onExecute:
             - |
               export artifactoryIntegrationName="ankul_artifactory"
               export inputNpmBuildStepName="npm_build"
@@ -77,4 +77,4 @@ pipelines:
               local buildName=$(eval echo "$""$inputNpmBuildStepName"_buildName)
               local sourceStateName=$(eval echo "$""$inputNpmBuildStepName"_sourceStateName)
               local sourceLocation=$(eval echo "$""$inputNpmBuildStepName"_sourceLocation)
-              local repositoryName=$(jq -r ".step.configuration.repositoryName" $step_json_path)
+#               local repositoryName=$(jq -r ".step.configuration.repositoryName" $step_json_path)
