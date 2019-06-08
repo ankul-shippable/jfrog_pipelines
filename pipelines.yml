@@ -23,16 +23,16 @@ resources:
 pipelines:
   - name: ankul_pipeline
     steps:
-#       - name: test_step
-#         type: Bash
-#         configuration:
-#           nodePool: ankul_u16_nodes
-#         triggeredBy:
-#           resources:
-#             - sample_node
-#         execution:
-#           onExecute:
-#             - echo "executing test bash step..."
+      - name: test_step
+        type: Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+        triggeredBy:
+          resources:
+            - sample_node
+        execution:
+          onExecute:
+            - echo "executing test bash step..."
 
       - name: npm_build
         type: NpmBuild
