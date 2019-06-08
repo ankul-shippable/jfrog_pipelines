@@ -4,9 +4,6 @@ resources:
     configuration:
       gitProvider: ankul_github
       path: ankul-shippable/sample_node
-#       files:
-#         include: test.sh
-#         exclude: random.sh
       branches:
         include: master
       tags:
@@ -27,9 +24,8 @@ pipelines:
         type: Bash
         configuration:
           nodePool: ankul_u16_nodes
-        triggeredBy:
-          resources:
-            - sample_node
+          inputResources:
+            - name: sample_node
         execution:
           onExecute:
             - echo "executing test bash step..."
@@ -40,13 +36,12 @@ pipelines:
           npmArgs: -g
           repositoryName: test_repo
           sourceLocation: .
-        requires:
           integrations:
-            - ankul_artifactory
-          resources:
-            - sample_node
-#           steps:
-#             - test_step
+            - name: ankul_artifactory
+          inputResources:
+            - name: sample_node
+          inputSteps:
+            - name: test_step
         execution:
           onSuccess:
             - |
