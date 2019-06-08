@@ -35,7 +35,7 @@ pipelines:
         configuration:
 #           npmArgs: -g
           nodePool: ankul_u16_nodes
-          repositoryName: npm-dev-local
+          repositoryName: npm-dev-virtual
           sourceLocation: .
           integrations:
             - name: ankul_artifactory
@@ -46,11 +46,13 @@ pipelines:
         execution:
           onSuccess:
             - echo "success!"
+            - sourceLocation=$(jq -r ".step.configuration.sourceLocation" $step_json_path) 
+            - add_run_variable ${step_name}_sourceLocation=$sourceLocation
            
       - name: npm_publish
         type: NpmPublish
         configuration:
-          repositoryName: npm-dev-local
+          repositoryName: ankul-npm-publish
           integrations:
             - name: ankul_artifactory
           inputSteps:
