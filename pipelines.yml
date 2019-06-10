@@ -39,7 +39,7 @@ pipelines:
             - name: sample_node
             - name: files
           inputSteps:
-            - name: test_step_1
+            - name: test_step
         execution:
           onSuccess:
             - sudo apt-get install tree
