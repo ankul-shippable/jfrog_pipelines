@@ -62,9 +62,18 @@ pipelines:
           integrations:
             - name: ankul_artifactory
           inputSteps:
-            - name: npm_build
+            - name: npm_build 
+             
+      - name: publish_build_info
+        type: PublishBuildInfo
+        configuration:
+          nodePool: ankul_u16_nodes
+          integrations:
+            - name: ankul_artifactory
+          inputSteps:
+            - name: npm_publish
           outputResources:
-             - name: buildInfo 
+             - name: buildInfo              
             
       - name: scan
         type: XrayScan
@@ -75,7 +84,7 @@ pipelines:
           integrations:
             - name: ankul_artifactory
           inputSteps:
-            - name: npm_publish
+            - name: publish_build_info
           inputResources:
             - name: buildInfo            
             
@@ -88,6 +97,6 @@ pipelines:
           integrations:
             - name: ankul_artifactory
           inputSteps:
-            - name: npm_publish
+            - name: publish_build_info
           inputResources:
             - name: buildInfo                        
