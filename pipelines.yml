@@ -41,7 +41,7 @@ pipelines:
           inputSteps:
             - name: test_step
         execution:
-          onSuccess:
+          onStart:
             - sudo apt-get install tree
             - filePath=$(eval echo "$"res_"$inputFileResourceName"_resourcePath)
             - echo $filePath
