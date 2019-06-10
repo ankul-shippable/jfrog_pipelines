@@ -74,5 +74,5 @@ pipelines:
           buildNumber: 1
           integrations:
             - name: ankul_artifactory
-          inputResources:
-            - name: buildInfo            
+#           inputResources:
+#             - name: buildInfo            
