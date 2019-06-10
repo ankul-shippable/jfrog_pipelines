@@ -93,7 +93,7 @@ pipelines:
         configuration:
           nodePool: ankul_u16_nodes
           buildName: test
-#           buildNumber: 1
+          buildNumber: 1
           integrations:
             - name: ankul_artifactory
           inputSteps:
