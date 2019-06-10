@@ -20,7 +20,7 @@ pipelines:
       - name: test_step
         type: Bash
         configuration:
-          nodePool: ankul_u16_nodes
+#           nodePool: ankul_u16_nodes
           inputResources:
             - name: files
         execution:
@@ -30,20 +30,21 @@ pipelines:
       - name: npm_build
         type: NpmBuild
         configuration:
-          nodePool: ankul_u16_nodes
+#           nodePool: ankul_u16_nodes
           repositoryName: npm-dev-virtual
           sourceLocation: .
           integrations:
             - name: ankul_artifactory
           inputResources:
             - name: sample_node
+            - name: files
           inputSteps:
             - name: test_step
            
       - name: npm_publish
         type: NpmPublish
         configuration:
-          nodePool: ankul_u16_nodes
+#           nodePool: ankul_u16_nodes
           repositoryName: ankul-npm-publish
           integrations:
             - name: ankul_artifactory
