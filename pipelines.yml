@@ -74,5 +74,7 @@ pipelines:
           buildNumber: 1
           integrations:
             - name: ankul_artifactory
+          inputSteps:
+            - npm_publish
 #           inputResources:
 #             - name: buildInfo            
