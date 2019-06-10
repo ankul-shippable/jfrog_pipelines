@@ -40,6 +40,12 @@ pipelines:
             - name: files
           inputSteps:
             - name: test_step
+        execution:
+          onSuccess:
+            - sudo apt-get install tree
+            - filePath=$(eval echo "$"res_"$inputFileResourceName"_resourcePath)
+            - echo $filePath
+            - tree $filePath
            
       - name: npm_publish
         type: NpmPublish
