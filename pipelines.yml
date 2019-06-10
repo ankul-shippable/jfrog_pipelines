@@ -98,5 +98,5 @@ pipelines:
             - name: ankul_artifactory
           inputSteps:
             - name: publish_build_info
-          inputResources:
-            - name: buildInfo                        
+#           inputResources:
+#             - name: buildInfo                        
