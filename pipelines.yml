@@ -13,6 +13,12 @@ resources:
       sourceArtifactory: ankul_artifactory
       pattern: docker-virtual/demo/
       limit: 2
+      
+  - name: buildInfo
+    type: BuildInfo
+    configuration:
+      buildName: test_build
+      buildNumbe: 1 
 
 pipelines:
   - name: ankul_pipeline
@@ -56,3 +62,12 @@ pipelines:
             - name: ankul_artifactory
           inputSteps:
             - name: npm_build
+            
+      - name: scan
+        type: XrayScan
+        configuration:
+          nodePool: ankul_u16_nodes
+          integrations:
+            - name: ankul_artifactory
+          inputResources:
+            - name: buildInfo            
