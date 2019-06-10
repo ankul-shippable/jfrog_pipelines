@@ -17,8 +17,9 @@ resources:
   - name: buildInfo
     type: BuildInfo
     configuration:
+      sourceArtifactory: ankul_artifactory
       buildName: test_build
-      buildNumbe: 1 
+      buildNumber: 1 
 
 pipelines:
   - name: ankul_pipeline
