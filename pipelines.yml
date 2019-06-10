@@ -92,7 +92,7 @@ pipelines:
         type: PromoteBuild
         configuration:
           nodePool: ankul_u16_nodes
-#           buildName: test
+          buildName: test
 #           buildNumber: 1
           integrations:
             - name: ankul_artifactory
