@@ -63,6 +63,8 @@ pipelines:
             - name: ankul_artifactory
           inputSteps:
             - name: npm_build
+          outputResources:
+             - name: buildInfo 
             
       - name: scan
         type: XrayScan
