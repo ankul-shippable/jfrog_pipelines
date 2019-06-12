@@ -19,5 +19,5 @@ pipelines:
       - name: promote
         type: PromoteBuild
         configuration:
-          inputResources:
+          inputSteps:
             - name: test_step
