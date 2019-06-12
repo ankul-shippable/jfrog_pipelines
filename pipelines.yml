@@ -38,7 +38,7 @@ pipelines:
       - name: promote
         type: PromoteBuild
         configuration:
-          tartgetRepository: npm-test
+          targetRepository: npm-test
           inputResources:
             - name: files_in
           outputResources:
