@@ -1,11 +1,19 @@
+resources:
+  - name: buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      buildName: test
+      buildNumber: "1"
+
 pipelines:
   - name: ankul_pipeline
     steps:
       - name: test_step
           type: Bash
         configuration:
-          integrations:
-            - ankul_artifactory
+          inputResources:
+            - buildinfo
         execution:
           onExecute:
             - echo "executing test bash step..."
