@@ -17,3 +17,4 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test bash step..."
+            - printenv
