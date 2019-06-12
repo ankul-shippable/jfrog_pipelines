@@ -40,8 +40,8 @@ pipelines:
         configuration:
           targetRepository: npm-test
           inputResources:
-            - name: files_in
+            - name: buildinfo
           outputResources:
-            - name: files_out
+            - name: promoteinfo
           inputSteps:
             - name: test_step
