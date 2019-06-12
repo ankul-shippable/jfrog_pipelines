@@ -1,10 +1,24 @@
 resources:
+  - name: files
+    type: FileSpec
+    configuration:
+      sourceArtifactory: ankul_artifactory
+    version:
+      pattern: "npm-dev-local/"
+
   - name: buildinfo
     type: BuildInfo
     configuration:
       sourceArtifactory: ankul_artifactory
       buildName: test
       buildNumber: 11
+      
+  - name: promoteinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      buildName: test
+      buildNumber: 11      
 
 pipelines:
   - name: ankul_pipeline
@@ -19,5 +33,7 @@ pipelines:
       - name: promote
         type: PromoteBuild
         configuration:
+          inputResources:
+            - name: files
           inputSteps:
             - name: test_step
