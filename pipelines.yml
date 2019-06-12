@@ -11,10 +11,13 @@ pipelines:
     steps:
       - name: test_step
         type: Bash
-        configuration:
-          inputResources:
-            - name: buildinfo
         execution:
           onExecute:
             - echo "executing test bash step..."
             - printenv
+            
+      - name: promote
+        type: PromoteBuild
+        configuration:
+          inputResources:
+            - name: test_step
