@@ -10,7 +10,7 @@ pipelines:
   - name: ankul_pipeline
     steps:
       - name: test_step
-          type: Bash
+        type: Bash
         configuration:
           inputResources:
             - buildinfo
