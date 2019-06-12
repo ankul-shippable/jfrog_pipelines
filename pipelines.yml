@@ -1,31 +1,11 @@
-resources:
-  - name: state
-    type: state
-    initialVersion:
-      RANDOM_KEY: random_value
-      
-
 pipelines:
-  - name: pipeline_1
+  - name: ankul_pipeline
     steps:
-      - name: step_1
-        type: bash
-        requires:
-          resources:
-            - state
+      - name: test_step
+          type: Bash
+        configuration:
+          integrations:
+            - ankul_artifactory
         execution:
           onExecute:
-            - echo "executing test bash step_1..."
-        outputResources:
-          - state
-            
-      - name: step_2
-        type: bash
-        requires:
-          resources:
-            - state
-        execution:
-          onExecute:
-            - echo "executing test bash step_2..."  
-        outputResources:
-          - state
+            - echo "executing test bash step..."
