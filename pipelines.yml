@@ -4,7 +4,7 @@ resources:
     configuration:
       sourceArtifactory: ankul_artifactory
       buildName: test
-      buildNumber: "1"
+      buildNumber: 11
 
 pipelines:
   - name: ankul_pipeline
