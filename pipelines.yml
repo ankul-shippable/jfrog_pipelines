@@ -13,7 +13,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - buildinfo
+            - name: buildinfo
         execution:
           onExecute:
             - echo "executing test bash step..."
