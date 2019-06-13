@@ -32,13 +32,11 @@ pipelines:
       - name: promote
         type: PromoteBuild
         configuration:
-          targetRepository: npm-test
+          targetRepository: ankul-docker-publish
           inputResources:
             - name: buildinfo
           outputResources:
             - name: promoteinfo
-          inputSteps:
-            - name: test_step
 
       - name: build_docker_image
         type: DockerBuild
@@ -61,3 +59,5 @@ pipelines:
             - name: ankul_artifactory
           inputSteps:
             - name: build_docker_image
+          outputResources:
+            - name: buildinfo
