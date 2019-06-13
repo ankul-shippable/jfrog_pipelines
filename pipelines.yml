@@ -40,10 +40,10 @@ pipelines:
             - name: sample_node
           inputSteps:
             - name: test_step
-          execution:
-            onComplete:
-              - sudo apt-get install tree
-              - tree /tmp/jfrog
+        execution:
+          onComplete:
+            - sudo apt-get install tree
+            - tree /tmp/jfrog
 
       - name: push_docker_image
         type: DockerPush
@@ -69,7 +69,7 @@ pipelines:
             - name: buildinfo
           outputResources:
             - name: promoteinfo
-          execution:
-            onComplete:
-              - sudo apt-get install tree
-              - tree /tmp/jfrog            
+        execution:
+          onComplete:
+            - sudo apt-get install tree
+            - tree /tmp/jfrog            
