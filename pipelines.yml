@@ -40,7 +40,6 @@ pipelines:
           inputSteps:
             - name: test_step
 
-
       - name: build_docker_image
         type: DockerBuild
         configuration:
@@ -52,3 +51,11 @@ pipelines:
             - name: sample_node
           inputSteps:
             - name: test_step
+
+      - name: push_docker_image
+        type: DockerPush
+        configuration:
+          integrations:
+            - name: ankul_artifactory
+          inputSteps:
+            - name: build_docker_image
