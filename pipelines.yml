@@ -51,3 +51,5 @@ pipelines:
           sourceLocation: .
           inputResources:
             - name: sample_node
+          inputSteps:
+            - name: test_step
