@@ -44,11 +44,10 @@ pipelines:
       - name: build_docker_image
         type: DockerBuild
         configuration:
-          dockerFileLocation: some_place
+          dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: test 
           dockerImageTag: latest
-          sourceLocation: .
           inputResources:
             - name: sample_node
           inputSteps:
