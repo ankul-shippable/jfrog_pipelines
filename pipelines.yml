@@ -53,7 +53,7 @@ pipelines:
       - name: push_docker_image
         type: DockerPush
         configuration:
-          targetRepository: ankul_local_repo
+          targetRepository: docker-local
           autoPublishBuildInfo: true
           integrations:
             - name: ankul_artifactory
