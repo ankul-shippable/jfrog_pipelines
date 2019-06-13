@@ -45,8 +45,8 @@ pipelines:
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: test 
-          dockerImageTag: latest
+          dockerImageName: 34.66.110.173:8081/docker-local/ankul 
+          dockerImageTag: $PIPELINE_NAME.$RUN_NUMBER
           inputResources:
             - name: sample_node
           inputSteps:
