@@ -43,7 +43,7 @@ pipelines:
         execution:
           onComplete:
             - sudo apt-get install tree
-            - tree /tmp/jfrog
+            - tree $run_state/workspace
 
       - name: push_docker_image
         type: DockerPush
@@ -59,7 +59,7 @@ pipelines:
         execution:
           onComplete:
             - sudo apt-get install tree
-            - tree /tmp/jfrog
+            - tree $run_state/workspace
 
       - name: promote
         type: PromoteBuild
@@ -72,4 +72,4 @@ pipelines:
         execution:
           onComplete:
             - sudo apt-get install tree
-            - tree /tmp/jfrog            
+            - tree $run_state/workspace      
