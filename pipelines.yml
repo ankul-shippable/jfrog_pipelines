@@ -56,10 +56,10 @@ pipelines:
             - name: build_docker_image
           outputResources:
             - name: buildinfo
-          execution:
-            onComplete:
-              - sudo apt-get install tree
-              - tree /tmp/jfrog
+        execution:
+          onComplete:
+            - sudo apt-get install tree
+            - tree /tmp/jfrog
 
       - name: promote
         type: PromoteBuild
