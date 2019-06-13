@@ -55,6 +55,7 @@ pipelines:
       - name: push_docker_image
         type: DockerPush
         configuration:
+          targetRepository: ankul_local_repo
           integrations:
             - name: ankul_artifactory
           inputSteps:
