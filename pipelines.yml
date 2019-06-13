@@ -27,16 +27,7 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test bash step..."
-            - printenv
-            
-      - name: promote
-        type: PromoteBuild
-        configuration:
-          targetRepository: ankul-docker-publish
-          inputResources:
-            - name: buildinfo
-          outputResources:
-            - name: promoteinfo
+            - printenv           
 
       - name: build_docker_image
         type: DockerBuild
@@ -49,6 +40,10 @@ pipelines:
             - name: sample_node
           inputSteps:
             - name: test_step
+          execution:
+            onComplete:
+              - sudo apt-get install tree
+              - tree /tmp/jfrog
 
       - name: push_docker_image
         type: DockerPush
@@ -61,3 +56,20 @@ pipelines:
             - name: build_docker_image
           outputResources:
             - name: buildinfo
+          execution:
+            onComplete:
+              - sudo apt-get install tree
+              - tree /tmp/jfrog
+
+      - name: promote
+        type: PromoteBuild
+        configuration:
+          targetRepository: ankul-docker-publish
+          inputResources:
+            - name: buildinfo
+          outputResources:
+            - name: promoteinfo
+          execution:
+            onComplete:
+              - sudo apt-get install tree
+              - tree /tmp/jfrog            
