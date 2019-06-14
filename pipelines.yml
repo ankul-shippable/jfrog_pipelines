@@ -4,6 +4,12 @@ resources:
     configuration:
       gitProvider: ankul_github
       path: ankul-shippable/sample_node
+      
+  - name: version
+    type: FileSpec
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      pattern: ankul_local_repo/version.json    
 
   - name: buildinfo
     type: BuildInfo
@@ -31,6 +37,7 @@ pipelines:
           dockerImageTag: $pipeline_name.$run_number
           inputResources:
             - name: sample_node
+            - name: version
         execution:
           onComplete:
             - sudo apt-get install tree
