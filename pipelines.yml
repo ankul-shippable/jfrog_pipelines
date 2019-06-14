@@ -73,3 +73,27 @@ pipelines:
           onComplete:
             - sudo apt-get install tree
             - tree $run_dir/workspace      
+
+  - name: ankul_pipeline_2
+    steps:
+      - name: start_npm_build
+        type: NpmBuild
+        configuration:
+          repositoryName: ranjan_npm_test
+          sourceLocation: .
+          inputResources:
+            - name: npm_project
+          integrations:
+            - name: ranjan_artifactory
+            
+      - name: start_npm_pub_autopub_true
+        type: NpmPublish
+        configuration:
+          repositoryName: ranjan_npm_local
+          autoPublishBuildInfo: true
+          inputSteps:
+            - name: start_npm_build
+          integrations:
+            - name: ranjan_artifactory
+          outputResources:
+            - name: npm_build_info
