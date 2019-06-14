@@ -22,13 +22,6 @@ resources:
 pipelines:
   - name: ankul_pipeline
     steps:
-      - name: test_step
-        type: Bash
-        execution:
-          onExecute:
-            - echo "executing test bash step..."
-            - printenv           
-
       - name: build_docker_image
         type: DockerBuild
         configuration:
@@ -38,8 +31,6 @@ pipelines:
           dockerImageTag: $pipeline_name.$run_number
           inputResources:
             - name: sample_node
-          inputSteps:
-            - name: test_step
         execution:
           onComplete:
             - sudo apt-get install tree
