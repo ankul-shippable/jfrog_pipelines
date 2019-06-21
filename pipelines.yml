@@ -27,6 +27,27 @@ resources:
       sourceArtifactory: art
       buildName: test
       buildNumber: 11      
+      
+  - name: buildinfo_21
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
+
+  - name: buildinfo_22
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
+      
+  - name: buildinfo_23
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11            
 
 pipelines:
   - name: ankul_pipeline
@@ -169,7 +190,7 @@ pipelines:
           inputSteps:
             - name: step_21
           outputResources:
-            - name: buildinfo_1
+            - name: buildinfo_21
         execution:
           onExecute:
             - echo "executing test Bash step step..."
@@ -199,12 +220,12 @@ pipelines:
         configuration:
           nodePool: ankul_u16_nodes
           inputResources:
-            - name: buildinfo_1
+            - name: buildinfo_21
           inputSteps:
             - name: step_23
             - name: step_24
           outputResources:
-            - name: buildinfo_2
+            - name: buildinfo_22
         execution:
           onExecute:
             - echo "executing test Bash step step..."             
@@ -214,7 +235,7 @@ pipelines:
         configuration:
           nodePool: ankul_u16_nodes
           inputResources:
-            - name: buildinfo_2
+            - name: buildinfo_22
         execution:
           onExecute:
             - echo "executing test Bash step step..."    
@@ -236,7 +257,7 @@ pipelines:
           inputSteps:
             - name: step_27
           outputResources:
-            - name: buildinfo_3
+            - name: buildinfo_23
         execution:
           onExecute:
             - echo "executing test Bash step step..."       
@@ -256,7 +277,7 @@ pipelines:
         configuration:
           nodePool: ankul_u16_nodes
           inputResources:
-            - name: buildinfo_3
+            - name: buildinfo_23
           inputSteps:
             - name: step_19
         execution:
