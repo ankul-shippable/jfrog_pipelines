@@ -6,6 +6,20 @@ resources:
       path: ankul-shippable/sample_node
       branches:
         include: master
+        
+  - name: buildinfo_1
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
+
+  - name: buildinfo_2
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
 
 pipelines:
   - name: ankul_pipeline
@@ -26,6 +40,8 @@ pipelines:
           nodePool: ankul_u16_nodes
           inputSteps:
             - name: step_1
+          outputResources:
+            - name: buildinfo_1
         execution:
           onExecute:
             - echo "executing test Bash step step..."
@@ -54,8 +70,9 @@ pipelines:
         type:  Bash
         configuration:
           nodePool: ankul_u16_nodes
+          inputResources:
+            - name: buildinfo_1
           inputSteps:
-            - name: step_2
             - name: step_3
             - name: step_4
         execution:
