@@ -35,7 +35,7 @@ pipelines:
         configuration:
           nodePool: ankul_u16_nodes
           inputSteps:
-            - name: step_2
+            - name: step_1
         execution:
           onExecute:
             - echo "executing test Bash step step_3..." 
@@ -45,7 +45,19 @@ pipelines:
         configuration:
           nodePool: ankul_u16_nodes
           inputSteps:
+            - name: step_1
+        execution:
+          onExecute:
+            - echo "executing test Bash step step_3..."             
+
+      - name: step_5
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_2
             - name: step_3
+            - name: step_4
         execution:
           onExecute:
             - echo "executing test Bash step step_3..."             
