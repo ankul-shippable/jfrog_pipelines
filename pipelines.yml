@@ -262,34 +262,34 @@ pipelines:
           onExecute:
             - echo "executing test Bash step step..."       
             
-      - name: step_19
+      - name: step_29
         type:  Bash
         configuration:
           nodePool: ankul_u16_nodes
           inputSteps:
-            - name: step_17
+            - name: step_27
         execution:
           onExecute:
             - echo "executing test Bash step step..."  
             
-      - name: step_20
+      - name: step_30
         type:  Bash
         configuration:
           nodePool: ankul_u16_nodes
           inputResources:
             - name: buildinfo_23
           inputSteps:
-            - name: step_19
+            - name: step_29
         execution:
           onExecute:
             - echo "executing test Bash step step..."                          
             
-      - name: step_21
+      - name: step_31
         type:  Bash
         configuration:
           nodePool: ankul_u16_nodes
           inputSteps:
-            - name: step_20
+            - name: step_30
         execution:
           onExecute:
             - echo "executing test Bash step step..." 
