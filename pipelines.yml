@@ -1,34 +1,51 @@
 resources:
-  - name: ankul_sample_node
-    type: gitRepo
-    repoPath: ankul-shippable/sample_node
+  - name: sample_node
+    type:   GitRepo
     configuration:
-      integrationName: ankul_github
+      gitProvider: ankul_github
+      path: ankul-shippable/sample_node
       branches:
-        only: master
-    initialVersion:
-      sha: master
+        include: master
 
 pipelines:
-  - name: test_pipeline_1
+  - name: ankul_pipeline
     steps:
       - name: step_1
-        type: bash
-        triggeredBy:
-          resources:
-            - ankul_sample_node
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputResources:
+            - name: sample_node
         execution:
           onExecute:
-            - echo "executing test bash step pipe_1_step_1..."
+            - echo "executing test Bash step step_1..."
             
-            
-  - name: test_pipeline_2
-    steps:
-      - name: step_1
-        type: bash
-        triggeredBy:
-          resources:
-            - ankul_sample_node
+      - name: step_2
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_1
         execution:
           onExecute:
-            - echo "executing test bash pipe_2_step_1..."  
+            - echo "executing test Bash step step_2..."
+            
+      - name: step_3
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_2
+        execution:
+          onExecute:
+            - echo "executing test Bash step step_3..." 
+            
+      - name: step_4
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_3
+        execution:
+          onExecute:
+            - echo "executing test Bash step step_3..."             
