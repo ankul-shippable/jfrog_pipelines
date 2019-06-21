@@ -20,6 +20,13 @@ resources:
       sourceArtifactory: art
       buildName: test
       buildNumber: 11
+      
+  - name: buildinfo_3
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11      
 
 pipelines:
   - name: ankul_pipeline
@@ -75,6 +82,8 @@ pipelines:
           inputSteps:
             - name: step_3
             - name: step_4
+          outputResources:
+            - name: buildinfo_2
         execution:
           onExecute:
             - echo "executing test Bash step step..."             
@@ -83,8 +92,8 @@ pipelines:
         type:  Bash
         configuration:
           nodePool: ankul_u16_nodes
-          inputSteps:
-            - name: step_5
+          inputResources:
+            - name: buildinfo_2
         execution:
           onExecute:
             - echo "executing test Bash step step..."    
@@ -105,6 +114,8 @@ pipelines:
           nodePool: ankul_u16_nodes
           inputSteps:
             - name: step_7
+          outputResources:
+            - name: buildinfo_3
         execution:
           onExecute:
             - echo "executing test Bash step step..."       
@@ -123,8 +134,9 @@ pipelines:
         type:  Bash
         configuration:
           nodePool: ankul_u16_nodes
+          inputResources:
+            - name: buildinfo_3
           inputSteps:
-            - name: step_8
             - name: step_9
         execution:
           onExecute:
