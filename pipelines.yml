@@ -49,6 +49,27 @@ resources:
       buildName: test
       buildNumber: 11            
 
+  - name: buildinfo_41
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
+
+  - name: buildinfo_42
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
+      
+  - name: buildinfo_43
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: art
+      buildName: test
+      buildNumber: 11
+
 pipelines:
   - name: ankul_pipeline
     steps:
@@ -290,6 +311,127 @@ pipelines:
           nodePool: ankul_u16_nodes
           inputSteps:
             - name: step_30
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..." 
+
+      - name: step_41
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_1
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."                                         
+
+      - name: step_42
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_41
+          outputResources:
+            - name: buildinfo_41
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."
+            
+      - name: step_43
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_41
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..." 
+            
+      - name: step_44
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_41
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."             
+
+      - name: step_45
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputResources:
+            - name: buildinfo_41
+          inputSteps:
+            - name: step_43
+            - name: step_44
+          outputResources:
+            - name: buildinfo_42
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."             
+
+      - name: step_46
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputResources:
+            - name: buildinfo_42
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."    
+            
+      - name: step_47
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_46
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..." 
+            
+      - name: step_48
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_47
+          outputResources:
+            - name: buildinfo_43
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."       
+            
+      - name: step_49
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_47
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."  
+            
+      - name: step_50
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputResources:
+            - name: buildinfo_43
+          inputSteps:
+            - name: step_49
+        execution:
+          onExecute:
+            - echo "executing test Bash step step..."                          
+            
+      - name: step_51
+        type:  Bash
+        configuration:
+          nodePool: ankul_u16_nodes
+          inputSteps:
+            - name: step_50
         execution:
           onExecute:
             - echo "executing test Bash step step..." 
