@@ -38,7 +38,6 @@ pipelines:
           inputResources:
             - name: sample_node
             - name: version
-          outputResources:
         execution:
           onComplete:
             - sudo apt-get install tree
