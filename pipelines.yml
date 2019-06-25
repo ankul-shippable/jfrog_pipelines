@@ -8,7 +8,7 @@ resources:
   - name: version
     type: FileSpec
     configuration:
-#       sourceArtifactory: ankul_artifactory
+      sourceArtifactory: ankul_artifactory
       pattern: ankul_local_repo/version.json    
 
   - name: buildinfo
