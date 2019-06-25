@@ -3,7 +3,7 @@ resources:
     type: GitRepo
     configuration:
       gitProvider: ankul_github
-#       path: ankul-shippable/sample_node
+      path: ankul-shippable/sample_node
       
   - name: version
     type: FileSpec
