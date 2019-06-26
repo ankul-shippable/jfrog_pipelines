@@ -110,8 +110,8 @@ pipelines:
       - name: deploy
         type: Bash
         configuration:
-          inputResources:
-            - name: promoteinfo
+#           inputResources:
+#             - name: promoteinfo
         execution:
           onComplete:
             - sudo apt-get install tree
