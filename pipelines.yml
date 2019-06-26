@@ -82,5 +82,16 @@ pipelines:
           onComplete:
             - sudo apt-get install tree
             - tree $run_dir/workspace
-            - echo true            
+            - echo true  
+            
+      - name: deploy_2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: deploy
+        execution:
+          onComplete:
+            - sudo apt-get install tree
+            - tree $run_dir/workspace
+            - echo true              
             
