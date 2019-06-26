@@ -43,6 +43,23 @@ pipelines:
             - sudo apt-get install tree
             - tree $run_dir/workspace
 
+      - name: push_docker_image
+        type: DockerPush
+        configuration:
+          targetRepository: docker-local
+          autoPublishBuildInfo: true
+          integrations:
+            - name: ankul_artifactory
+          inputSteps:
+            - name: build_docker_image
+          outputResources:
+            - name: buildinfo
+        execution:
+          onComplete:
+            - sudo apt-get install tree
+            - tree $run_dir/workspace
+
+
   - name: ankul_pipeline
     steps:
       - name: build_docker_image
