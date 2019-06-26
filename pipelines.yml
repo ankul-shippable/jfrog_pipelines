@@ -51,7 +51,7 @@ pipelines:
           integrations:
             - name: ankul_artifactory
           inputSteps:
-            -
+            - name: build_docker_image____2
           outputResources:
             - name: buildinfo
         execution:
