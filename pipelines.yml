@@ -26,6 +26,23 @@ resources:
       buildNumber: 3
 
 pipelines:
+  - name: ankul_pipeline_2
+    steps:
+      - name: build_docker_image
+        type: DockerBuild
+        configuration:
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: 34.66.110.173:8081/docker-local/ankul 
+          dockerImageTag: $pipeline_name.$run_number
+          inputResources:
+            - name: sample_node
+            - name: version
+        execution:
+          onComplete:
+            - sudo apt-get install tree
+            - tree $run_dir/workspace
+
   - name: ankul_pipeline
     steps:
       - name: build_docker_image
