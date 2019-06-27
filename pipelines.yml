@@ -1,9 +1,9 @@
-resources:      
-  - name: version
-    type: FileSpec
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      pattern: ankul_local_repo/version.json
+# resources:      
+#   - name: version
+#     type: FileSpec
+#     configuration:
+#       sourceArtifactory: ankul_artifactory
+#       pattern: ankul_local_repo/version.json
       
 pipelines:
   - name: ankul_pipeline_3
