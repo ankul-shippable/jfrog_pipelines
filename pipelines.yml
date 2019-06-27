@@ -10,6 +10,12 @@ resources:
     configuration:
       sourceArtifactory: ankul_artifactory
       pattern: ankul_local_repo/version.json    
+      
+  - name: version
+    type: FileSpec
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      pattern: ankul_local_repo/version.json          
 
   - name: buildinfo
     type: BuildInfo
