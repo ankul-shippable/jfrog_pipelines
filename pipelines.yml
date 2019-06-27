@@ -1,32 +1,12 @@
-resources:
-  - name: sample_node
-    type: GitRepo
-    configuration:
-      gitProvider: ankul_github
-      path: ankul-shippable/sample_node
-      
+resources:      
   - name: version
     type: FileSpec
     configuration:
       sourceArtifactory: ankul_artifactory
       pattern: ankul_local_repo/version.json
-
-  - name: buildinfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      buildName: go_publish_example
-      buildNumber: 3
       
-  - name: promoteinfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      buildName: go_publish_example
-      buildNumber: 4
-
 pipelines:
-  - name: ankul_pipeline_2
+  - name: ankul_pipeline_3
     steps:
       - name: build_docker_image
         type: DockerBuild
@@ -58,74 +38,3 @@ pipelines:
           onComplete:
             - sudo apt-get install tree
             - tree $run_dir/workspace
-
-
-  - name: ankul_pipeline
-    steps:
-      - name: build_docker_image
-        type: DockerBuild
-        configuration:
-          dockerFileLocation: .
-          dockerFileName: Dockerfile
-          dockerImageName: 34.66.110.173:8081/docker-local/ankul 
-          dockerImageTag: $pipeline_name.$run_number
-          inputResources:
-            - name: sample_node
-            - name: version
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-
-      - name: push_docker_image
-        type: DockerPush
-        configuration:
-          targetRepository: docker-local
-          autoPublishBuildInfo: true
-          integrations:
-            - name: ankul_artifactory
-          inputSteps:
-            - name: build_docker_image
-          outputResources:
-            - name: buildinfo
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-
-      - name: promote
-        type: PromoteBuild
-        configuration:
-          targetRepository: ankul-docker-publish
-          inputResources:
-            - name: buildinfo
-          outputResources:
-            - name: promoteinfo
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-            - echo true
-            
-      - name: deploy
-        type: Bash
-        configuration:
-          inputResources:
-            - name: promoteinfo
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-            - echo true  
-            
-      - name: deploy_2
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: deploy
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-            - echo true              
-            
