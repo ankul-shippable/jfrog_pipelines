@@ -16,7 +16,7 @@ resources:
     configuration:
       sourceArtifactory: ankul_artifactory
       buildName: go_publish_example
-#       buildNumber: 3
+      buildNumber: 3
       
   - name: promoteinfo
     type: BuildInfo
