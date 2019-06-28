@@ -41,9 +41,9 @@ pipelines:
             
       - name: step_3
         type: Bash
-#         configuration:
-#           inputSteps:
-#             - name: step_2
+        configuration:
+          inputSteps:
+            - name: step_2
         execution:
           onComplete:
             - echo true              
