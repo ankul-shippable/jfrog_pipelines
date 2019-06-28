@@ -88,6 +88,7 @@ pipelines:
             - name: build_docker_image
           outputResources:
             - name: buildinfo
+            - 
         execution:
           onComplete:
             - sudo apt-get install tree
@@ -117,7 +118,6 @@ pipelines:
             - sudo apt-get install tree
             - tree $run_dir/workspace
             - echo true  
-            -
             
       - name: deploy_2
         type: Bash
