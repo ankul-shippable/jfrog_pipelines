@@ -42,6 +42,10 @@ pipelines:
         configuration:
           inputSteps:
             - name: step_1
+          inputResources:
+            - name: version
+          outputResources:
+            - name: version
         execution:
           onComplete:
             - echo true  
