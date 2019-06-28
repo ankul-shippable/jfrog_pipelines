@@ -109,7 +109,7 @@ pipelines:
             
       - name: deploy
         type: Bash
-        configuration:
+#         configuration:
 #           inputResources:
 #             - name: promoteinfo
         execution:
