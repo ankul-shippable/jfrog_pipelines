@@ -88,7 +88,7 @@ pipelines:
             - name: build_docker_image
           outputResources:
             - name: buildinfo
-            - 
+            - dasas: asfasfas
         execution:
           onComplete:
             - sudo apt-get install tree
