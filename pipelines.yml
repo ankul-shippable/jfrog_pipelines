@@ -33,8 +33,6 @@ pipelines:
         configuration:
           inputResources:
             - name: version
-          outputResources:
-            - name: version
         execution:
           onComplete:
             - echo true            
