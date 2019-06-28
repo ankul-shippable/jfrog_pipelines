@@ -27,16 +27,7 @@ resources:
 
 pipelines:
   - name: ankul_pipeline_4
-    steps:
-      - name: step_1
-        type: Bash
-#         configuration:
-#           inputSteps:
-#             - name: step_3
-        execution:
-          onComplete:
-            - echo true  
-            
+    steps:  
       - name: step_2
         type: Bash
         configuration:
@@ -53,8 +44,8 @@ pipelines:
       - name: step_3
         type: Bash
         configuration:
-          inputSteps:
-            - name: step_2
+#           inputSteps:
+#             - name: step_2
         execution:
           onComplete:
             - echo true              
