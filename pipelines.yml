@@ -99,8 +99,8 @@ pipelines:
           targetRepository: ankul-docker-publish
           inputResources:
             - name: buildinfo
-#           outputResources:
-#             - name: promoteinfo
+          outputResources:
+            - name: promoteinfo
         execution:
           onComplete:
             - sudo apt-get install tree
@@ -110,8 +110,8 @@ pipelines:
       - name: deploy
         type: Bash
         configuration:
-          inputResources:
-            - name: promoteinfo
+#           inputResources:
+#             - name: promoteinfo
         execution:
           onComplete:
             - sudo apt-get install tree
