@@ -37,16 +37,7 @@ pipelines:
             - name: version
         execution:
           onComplete:
-            - echo true  
-            
-      - name: step_3
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: step_2
-        execution:
-          onComplete:
-            - echo true              
+            - echo true            
 
   - name: ankul_pipeline_2
     steps:
