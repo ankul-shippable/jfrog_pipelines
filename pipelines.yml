@@ -31,8 +31,6 @@ pipelines:
       - name: step_2
         type: Bash
         configuration:
-          inputSteps:
-            - name: step_1
           inputResources:
             - name: version
           outputResources:
@@ -43,7 +41,7 @@ pipelines:
             
       - name: step_3
         type: Bash
-        configuration:
+#         configuration:
 #           inputSteps:
 #             - name: step_2
         execution:
