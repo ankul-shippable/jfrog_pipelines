@@ -11,12 +11,12 @@ resources:
       sourceArtifactory: ankul_artifactory
       pattern: ankul_local_repo/version.json
 
-#   - name: buildinfo
-#     type: BuildInfo
-#     configuration:
-#       sourceArtifactory: ankul_artifactory
-#       buildName: go_publish_example
-#       buildNumber: 3
+  - name: buildinfo
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      buildName: go_publish_example
+      buildNumber: 3
       
   - name: promoteinfo
     type: BuildInfo
