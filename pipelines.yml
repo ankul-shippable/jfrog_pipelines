@@ -117,6 +117,7 @@ pipelines:
             - sudo apt-get install tree
             - tree $run_dir/workspace
             - echo true  
+            -
             
       - name: deploy_2
         type: Bash
