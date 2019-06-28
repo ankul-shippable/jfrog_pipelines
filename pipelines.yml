@@ -26,6 +26,35 @@ resources:
       buildNumber: 4
 
 pipelines:
+  - name: ankul_pipeline_3
+    steps:
+      - name: step_1
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_3
+        execution:
+          onComplete:
+            - echo true  
+            
+      - name: step_2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_1
+        execution:
+          onComplete:
+            - echo true  
+            
+      - name: step_3
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: step_2
+        execution:
+          onComplete:
+            - echo true              
+
   - name: ankul_pipeline_2
     steps:
       - name: build_docker_image
