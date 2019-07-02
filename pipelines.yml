@@ -25,7 +25,23 @@ pipelines:
         execution:
           onComplete:
             - echo true
-            
+ 
+       - name: p1_step_2
+        type: Bash
+        configuration:
+          runtime:
+            type: image
+            image:
+              custom:
+                name: step_image_name
+                tag: step_image_tag
+                registry: ankul_artifactory
+                sourceRepository: step_test_repo
+          inputResources:
+            - name: sample_node
+        execution:
+          onComplete:
+            - echo true
             
   - name: ankul_pipeline_2
     steps:
