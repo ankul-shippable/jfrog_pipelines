@@ -26,7 +26,7 @@ pipelines:
           onComplete:
             - echo true
  
-       - name: p1_step_2
+      - name: p1_step_2
         type: Bash
         configuration:
           runtime:
