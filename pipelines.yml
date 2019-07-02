@@ -22,6 +22,8 @@ pipelines:
         configuration:
           inputResources:
             - name: sample_node
+          integrations:
+            - name: ankul_github
         execution:
           onComplete:
             - echo true
