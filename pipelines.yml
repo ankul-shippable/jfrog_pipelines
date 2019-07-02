@@ -15,7 +15,7 @@ pipelines:
             name: image_name
             tag: image_tag
             registry: ankul_artifactory
-#             sourceRepository: test_repo           
+            sourceRepository: test_repo       
     steps:
       - name: p1_step_1
         type: Bash
