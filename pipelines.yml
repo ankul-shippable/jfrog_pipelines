@@ -5,138 +5,44 @@ resources:
       gitProvider: ankul_github
       path: ankul-shippable/sample_node
       
-  - name: version
-    type: FileSpec
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      pattern: ankul_local_repo/version.json
-
-  - name: buildinfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      buildName: go_publish_example
-      buildNumber: 3
-      
-  - name: promoteinfo
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      buildName: go_publish_example
-      buildNumber: 4
-
 pipelines:
-  - name: ankul_pipeline_4
-    steps:  
-      - name: step_2
+  - name: ankul_pipeline_1
+    configuration:
+      runtime:
+        type: image
+        image:
+          custom:
+            name: image_name
+            tag: image_tag
+            registry: artifactory_integration
+            sourceRepository: test_repo           
+    steps:
+      - name: p1_step_1
         type: Bash
         configuration:
           inputResources:
-            - name: version
-        execution:
-          onComplete:
-            - echo true            
-
-  - name: ankul_pipeline_2
-    steps:
-      - name: build_docker_image
-        type: DockerBuild
-        configuration:
-          dockerFileLocation: .
-          dockerFileName: Dockerfile
-          dockerImageName: 34.66.110.173:8081/docker-local/ankul 
-          dockerImageTag: $pipeline_name.$run_number
-          inputResources:
             - name: sample_node
-            - name: version
         execution:
           onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-
-      - name: push_docker_image
-        type: DockerPush
-        configuration:
-          targetRepository: docker-local
-          autoPublishBuildInfo: true
-          integrations:
-            - name: ankul_artifactory
-          inputSteps:
-            - name: build_docker_image
-          outputResources:
-            - name: buildinfo
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-
-
-  - name: ankul_pipeline
-    steps:
-      - name: build_docker_image
-        type: DockerBuild
-        configuration:
-          dockerFileLocation: .
-          dockerFileName: Dockerfile
-          dockerImageName: 34.66.110.173:8081/docker-local/ankul 
-          dockerImageTag: $pipeline_name.$run_number
-          inputResources:
-            - name: sample_node
-            - name: version
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-
-      - name: push_docker_image
-        type: DockerPush
-        configuration:
-          targetRepository: docker-local
-          autoPublishBuildInfo: true
-          integrations:
-            - name: ankul_artifactory
-          inputSteps:
-            - name: build_docker_image
-          outputResources:
-            - name: buildinfo
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-
-      - name: promote
-        type: PromoteBuild
-        configuration:
-          targetRepository: ankul-docker-publish
-          inputResources:
-            - name: buildinfo
-          outputResources:
-            - name: promoteinfo
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
             - echo true
             
-      - name: deploy
+            
+  - name: ankul_pipeline_2
+    steps:
+      - name: p2_step_1
         type: Bash
         configuration:
+          runtime:
+          type: image
+          image:
+            custom:
+              name: step_image_name
+              tag: step_image_tag
+              registry: artifactory_integration
+              sourceRepository: step_test_repo
+          
           inputResources:
-            - name: promoteinfo
+            - name: sample_node
         execution:
           onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-            - echo true  
-            
-      - name: deploy_2
-        type: Bash
-        configuration:
-          inputSteps:
-            - name: deploy
-        execution:
-          onComplete:
-            - sudo apt-get install tree
-            - tree $run_dir/workspace
-            - echo true              
-            
+            - echo true
