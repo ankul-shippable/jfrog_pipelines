@@ -48,6 +48,7 @@ pipelines:
             
       - name: p2_step_2
         type: Bash
+        configuration:
           inputResources:
             - name: sample_node
         execution:
