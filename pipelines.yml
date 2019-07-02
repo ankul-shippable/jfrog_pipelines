@@ -14,7 +14,7 @@ pipelines:
           custom:
             name: image_name
             tag: image_tag
-            registry: ankul_artifactory
+            registry: ankul_github
             sourceRepository: test_repo           
     steps:
       - name: p1_step_1
