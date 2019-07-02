@@ -43,7 +43,7 @@ pipelines:
             - name: sample_node
         execution:
           onComplete:
-            - echo true
+            - echo true2
             
   - name: ankul_pipeline_2
     steps:
