@@ -31,7 +31,7 @@ pipelines:
                 name: ankul/u16all
                 tag: master
                 registry: ankul_aws
-#                 sourceRepository: step_test_repo
+                region: eu-west-2
           inputSteps:
             - name: p1_step_1
         execution:
