@@ -8,6 +8,7 @@ resources:
 pipelines:
   - name: ankul_pipeline_1
     configuration:
+      nodePool: ankul_u16
       runtime:
         type: image
         image:
@@ -46,6 +47,8 @@ pipelines:
             - echo true2
             
   - name: ankul_pipeline_2
+    configuration:
+      nodePool: ankul_u16
     steps:
       - name: p2_step_1
         type: Bash
