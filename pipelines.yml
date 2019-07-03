@@ -1,7 +1,6 @@
 pipelines:
   - name: ankul_pipeline_3
     configuration:
-      nodePool: ankul_u16
       runtime:
         type: image
         image:
