@@ -1,110 +1,164 @@
 resources:
-  - name: files
-    type: file
+  - name: mvn_repo
+    type: GitRepo
     configuration:
-      integrationName: ankul_artifactory
-    version:
-      pattern: "npm-dev-local/"
-   
-  - name: sample_node
-    type: gitRepo
-    repoPath: ankul-shippable/sample_node
+      gitProvider: ankul_github
+      path: ankul-shippable/sample_java
+      
+  - name: build_info_mvn
+    type: BuildInfo
     configuration:
-      integrationName: ankul_github
-    version:
-      sha: "master"
+      sourceArtifactory: ankul_artifactory
+      buildName: full-mvn-native
+      buildNumber: 1
       
-  - name: promoteInfo
-    type: buildInfo
-    version:
-      buildName: bar
-      buildNumber: 2 
+  - name: promoted_build_info_mvn
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      buildName: promotoed-full-mvn-native
+      buildNumber: 1
       
-  - name: info
-    type: buildInfo
-    version:
-      buildName: foo
-      buildNumber: 1        
+  - name: unsigned_release_bundle_mvn
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: ankul_artifactory
+      name: unsigned_release_bundle_mvn
+      version: v0.0.1
+      isSigned: false
+      
+  - name: signed_release_bundle_mvn
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: ankul_artifactory
+      name: signed_release_bundle_mvn
+      version: v1.0.0
+      isSigned: true
+      
+  - name: distribution_rule_mvn
+    type: DistributionRule
+    configuration:
+      sourceDistribution: ankul_artifactory
+      cityName: "*"
+      serviceName: "*"
+      siteName: "*"
+      countryCodes:
+        - "GB"
+        - "CN"
       
 pipelines:
-  - name: ankul_pipeline
+  - name: test_pipeline
     steps:
-      - name: build
-        type: build
+      - name: mvn_build_step
+        type: MvnBuild
         configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        payloadType: docker
-        setup:
-          build:
-            dockerFileLocation: .
-            dockerFileName: Dockerfile
-            imageName: 34.66.110.173:8081/docker-local/ankul
-            imageTag: $PIPELINE_NAME.$RUN_NUMBER
-        requires:
+          sourceLocation: ./maven-example
+          mvnCommand: clean install -f ./pom.xml
+          configFileLocation: .
+          configFileName: mvn-art-config
+          inputResources:
+            - name: mvn_repo
           integrations:
-            - ankul_artifactory
-          resources:
-            - sample_node
-            - files
+            - name: ankul_artifactory
+          runtime:            
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
+        execution:
+          onStart:
+            - javac -version
+            - mvn --version
 
-      - name: push
-        type: push
+
+      - name: publish_build_info_mvn
+        type: PublishBuildInfo
         configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        setup:
-          push:
-            targetRepo: docker-local
-        requires:
+          inputSteps:
+            - name: mvn_build_step
+          outputResources:
+            - name: build_info_mvn
+          runtime:
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
+                
+
+
+      - name: promote_build_info_mvn
+        type: PromoteBuild
+        configuration:
+          targetRepository: generic-local
+          copy: true
           integrations:
-            - ankul_artifactory
-        triggeredBy:
-          steps:
-            - build
-            
-      - name: publish
-        type: publish
+            - name: ankul_artifactory 
+          inputResources:
+            - name: build_info_mvn
+          outputResources:
+            - name: promoted_build_info_mvn
+          runtime:
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
+                
+
+      - name: release_mvn
+        type: CreateReleaseBundle # needs admin access permission in JFrog Artifactory
+        execution:
+          onStart:
+            - printenv
+            - export integrationAlias=$(eval echo "$"res_"$buildInfo0"_integrationAlias)
+            - echo $buildInfo0
+            - echo $integrationAlias
+            - eval echo "$"res_"$buildInfo0"_"$integrationAlias"_name
+            - echo "$res_promoted_build_info_mvn_sourceArtifactory_name"
         configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        requires:
-          integrations:
-            - ankul_artifactory
-        triggeredBy:
-          steps:
-            - push
-        outputResources:
-          - info
-      
-      - name: promote
-        type: promote
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-        setup:
-          promote:
-            targetRepo: ankul_local_repo    
-        requires:
-          integrations:
-            - ankul_artifactory         
-        triggeredBy:
-          resources:
-            - info
-        outputResources:
-          - promoteInfo
-          
-      - name: bundle
-        type: CreateReleaseBundle
-        configuration:
-          affinityGroup: test
-          nodePool: ankul_nodes
-          releaseBundleName: test_2
-          releaseBundleVersion: v1.0.7
           dryRun: false
-        requires:
-          integrations:
-            - ankul_artifactory         
-        triggeredBy:
-          resources:
-            - promoteInfo
+          description: "from github.com/scriptnull/jp - develop - full-mvn-native.yml"
+          releaseBundleName: release_bundle_mvn
+          releaseBundleVersion: v2.0.$run_number
+          sign: false
+          inputResources:
+            - name: promoted_build_info_mvn
+          outputResources:
+            - name: unsigned_release_bundle_mvn
+          runtime:
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
+                
+
+      - name: sign_mvn
+        type: SignReleaseBundle
+        configuration:
+          inputResources:
+            - name: unsigned_release_bundle_mvn
+          outputResources:
+            - name: signed_release_bundle_mvn
+          runtime:
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master   
+                
+      - name: distribute_signed_release_mvn
+        type: DistributeReleaseBundle
+        configuration:
+          dryRun: false
+          inputResources:
+            - name: signed_release_bundle_mvn
+            - name: distribution_rule_mvn
+          runtime:
+            type: image
+            image:
+              custom:
+                name: drydock/u16java
+                tag: master
