@@ -36,6 +36,7 @@ pipelines:
             - name: p1_step_1
         execution:
           onExecute:
+            - local dockerRegistry="ankul_docker"
             - local userName=$(eval echo "$"int_"$dockerRegistry"_username)
             - local password=$(eval echo "$"int_"$dockerRegistry"_password)
             - local url=$(eval echo "$"int_"$dockerRegistry"_url)
