@@ -30,7 +30,7 @@ pipelines:
               custom:
                 name: ankul/u16all
                 tag: master
-                registry: ankul_docker
+                registry: ankul_aws
 #                 sourceRepository: step_test_repo
           inputSteps:
             - name: p1_step_1
