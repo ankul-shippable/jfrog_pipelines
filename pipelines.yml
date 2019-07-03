@@ -6,8 +6,7 @@ resources:
       path: ankul-shippable/sample_node
       
 pipelines:
-  - name: ankul_pipeline_1
-    configuration:  
+  - name: ankul_pipeline_1  
     steps:
       - name: p1_step_1
         type: Bash
