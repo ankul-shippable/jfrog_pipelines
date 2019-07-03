@@ -1,12 +1,5 @@
-resources:
-  - name: sample_node
-    type: GitRepo
-    configuration:
-      gitProvider: ankul_github
-      path: ankul-shippable/sample_node
-      
 pipelines:
-  - name: ankul_pipeline_1
+  - name: ankul_pipeline_3
     configuration:
       nodePool: ankul_u16
       runtime:
@@ -45,35 +38,4 @@ pipelines:
         execution:
           onComplete:
             - echo true2
-            
-  - name: ankul_pipeline_2
-    configuration:
-      nodePool: ankul_u16
-    steps:
-      - name: p2_step_1
-        type: Bash
-        configuration:
-          runtime:
-            type: image
-            image:
-              custom:
-                name: step_image_name
-                tag: step_image_tag
-                registry: ankul_artifactory
-                sourceRepository: step_test_repo
-          inputResources:
-            - name: sample_node
-        execution:
-          onComplete:
-            - echo true
-            
-      - name: p2_step_2
-        type: Bash
-        configuration:
-          inputResources:
-            - name: sample_node
-          integrations:
-            - name: ankul_artifactory
-        execution:
-          onComplete:
-            - printenv            
+               
