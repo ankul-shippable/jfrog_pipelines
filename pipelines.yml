@@ -22,7 +22,7 @@ resources:
   - name: unsigned_release_bundle_mvn
     type: ReleaseBundle
     configuration:
-      sourceDistribution: ankul_artifactory
+      sourceDistribution: ankul_distribution
       name: unsigned_release_bundle_mvn
       version: v0.0.1
       isSigned: false
@@ -30,7 +30,7 @@ resources:
   - name: signed_release_bundle_mvn
     type: ReleaseBundle
     configuration:
-      sourceDistribution: ankul_artifactory
+      sourceDistribution: ankul_distribution
       name: signed_release_bundle_mvn
       version: v1.0.0
       isSigned: true
@@ -38,7 +38,7 @@ resources:
   - name: distribution_rule_mvn
     type: DistributionRule
     configuration:
-      sourceDistribution: ankul_artifactory
+      sourceDistribution: ankul_distribution
       cityName: "*"
       serviceName: "*"
       siteName: "*"
