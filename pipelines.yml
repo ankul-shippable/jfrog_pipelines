@@ -1,164 +1,139 @@
 resources:
-  - name: mvn_repo
+  - name: artifactory_go
     type: GitRepo
     configuration:
       gitProvider: ankul_github
       path: ankul-shippable/sample_java
       
-  - name: build_info_mvn
+  - name: go_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: ankul_artifactory
-      buildName: full-mvn-native
+      sourceArtifactory: art
+      buildName: go_example_build
       buildNumber: 1
       
-  - name: promoted_build_info_mvn
+  - name: unsigned_release_bundle_go
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: dist 
+      name: go_test_bundle
+      version: v1.15
+      
+  - name: signed_release_bundle_go
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: dist 
+      name: go_test_bundle
+      version: v1.15
+      
+  - name: promoted_go_build
     type: BuildInfo
     configuration:
-      sourceArtifactory: ankul_artifactory
-      buildName: promotoed-full-mvn-native
+      sourceArtifactory: art 
+      buildName: promote_go_build_publish
       buildNumber: 1
       
-  - name: unsigned_release_bundle_mvn
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: ankul_distribution
-      name: unsigned_release_bundle_mvn
-      version: v0.0.1
-      isSigned: false
-      
-  - name: signed_release_bundle_mvn
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: ankul_distribution
-      name: signed_release_bundle_mvn
-      version: v1.0.0
-      isSigned: true
-      
-  - name: distribution_rule_mvn
+  - name: distribution_rule_go
     type: DistributionRule
     configuration:
-      sourceDistribution: ankul_distribution
+      sourceDistribution: dist
       cityName: "*"
       serviceName: "*"
       siteName: "*"
       countryCodes:
-        - "GB"
-        - "CN"
-      
+        - CN      
+
+
+
 pipelines:
-  - name: test_pipeline
+  - name: go_build
+    configuration:   
+      runtime:       
+        type: image
+        image:
+          custom:
+            name: vijaydocker1991/u18node
+            tag: gotesting
+            options: " "   
     steps:
-      - name: mvn_build_step
-        type: MvnBuild
+      - name: build_go
+        type: GoBuild
         configuration:
-          sourceLocation: ./maven-example
-          mvnCommand: clean install -f ./pom.xml
-          configFileLocation: .
-          configFileName: mvn-art-config
+          nodePool: ubuntu16
+          sourceLocation: .
+          repository: test-go-local
+          outputLocation: tmp
+          outputFile: hello
           inputResources:
-            - name: mvn_repo
+            - name: artifactory_go
           integrations:
-            - name: ankul_artifactory
-          runtime:            
-            type: image
-            image:
-              custom:
-                name: drydock/u16java
-                tag: master
+            - name: art
         execution:
           onStart:
-            - javac -version
-            - mvn --version
+            - wget https://dl.google.com/go/go1.12.5.linux-amd64.tar.gz
+            - sudo tar -C /usr/local -xzf go1.12.5.linux-amd64.tar.gz
+            - export PATH=$PATH:/usr/local/go/bin
+            - go version  
+            
+      - name: publish_go_binary
+        type: GoPublishBinary
+        configuration:
+          nodePool: ubuntu16        
+          inputSteps:
+            - name: build_go
+          targetRepository: test-go-local
+          integrations:
+            - name: art    
 
-
-      - name: publish_build_info_mvn
+      - name: publish_build
         type: PublishBuildInfo
         configuration:
+          nodePool: ubuntu16        
           inputSteps:
-            - name: mvn_build_step
+            - name: publish_go_binary
           outputResources:
-            - name: build_info_mvn
-          runtime:
-            type: image
-            image:
-              custom:
-                name: drydock/u16java
-                tag: master
-                
-
-
-      - name: promote_build_info_mvn
+            - name: go_build_info
+            
+      - name: promote_build_go
         type: PromoteBuild
         configuration:
-          targetRepository: generic-local
-          copy: true
+          nodePool: ubuntu16        
+          targetRepository: test-go-local
           integrations:
-            - name: ankul_artifactory 
+            - name: art
           inputResources:
-            - name: build_info_mvn
+            - name: go_build_info
           outputResources:
-            - name: promoted_build_info_mvn
-          runtime:
-            type: image
-            image:
-              custom:
-                name: drydock/u16java
-                tag: master
-                
-
-      - name: release_mvn
-        type: CreateReleaseBundle # needs admin access permission in JFrog Artifactory
-        execution:
-          onStart:
-            - printenv
-            - export integrationAlias=$(eval echo "$"res_"$buildInfo0"_integrationAlias)
-            - echo $buildInfo0
-            - echo $integrationAlias
-            - eval echo "$"res_"$buildInfo0"_"$integrationAlias"_name
-            - echo "$res_promoted_build_info_mvn_sourceArtifactory_name"
+            - name: promoted_go_build
+            
+      - name: bundle_go_publish
+        type: CreateReleaseBundle
         configuration:
+          nodePool: ubuntu16        
           dryRun: false
-          description: "from github.com/scriptnull/jp - develop - full-mvn-native.yml"
-          releaseBundleName: release_bundle_mvn
-          releaseBundleVersion: v2.0.$run_number
+          description: "This is to test GoBuild -> PushArtifactoryPackage -> PublishBuildInfo -> Promote -> CreateRelease -> Sign -> Distribute pipeline chain"
+          releaseBundleName: go_publish_test_build
+          releaseBundleVersion: v1.15
           sign: false
           inputResources:
-            - name: promoted_build_info_mvn
+            - name: promoted_go_build
           outputResources:
-            - name: unsigned_release_bundle_mvn
-          runtime:
-            type: image
-            image:
-              custom:
-                name: drydock/u16java
-                tag: master
-                
-
-      - name: sign_mvn
+            - name: unsigned_release_bundle_go
+            
+      - name: sign_release_bundle_go
         type: SignReleaseBundle
         configuration:
           inputResources:
-            - name: unsigned_release_bundle_mvn
+            - name: unsigned_release_bundle_go
           outputResources:
-            - name: signed_release_bundle_mvn
-          runtime:
-            type: image
-            image:
-              custom:
-                name: drydock/u16java
-                tag: master   
-                
-      - name: distribute_signed_release_mvn
+            - name: signed_release_bundle_go
+            
+      - name: distribute_signed_release_bundle
         type: DistributeReleaseBundle
         configuration:
           dryRun: false
           inputResources:
-            - name: signed_release_bundle_mvn
-            - name: distribution_rule_mvn
-          runtime:
-            type: image
-            image:
-              custom:
-                name: drydock/u16java
-                tag: master
+            - name: signed_release_bundle_go
+            - name: distribution_rule_go
+          integrations: 
+            - name: dist      
