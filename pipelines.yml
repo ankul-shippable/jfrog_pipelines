@@ -69,7 +69,7 @@ pipelines:
         configuration:
           inputResources:
             - name: sample_node
-          inputIntegrations:
+          integrations:
             - name: ankul_artifactory
         execution:
           onComplete:
