@@ -28,10 +28,10 @@ pipelines:
             type: image
             image:
               custom:
-                name: step_image_name
-                tag: step_image_tag
-                registry: ankul_artifactory
-                sourceRepository: step_test_repo
+                name: ankul/u16all
+                tag: master
+                registry: ankul_docker
+#                 sourceRepository: step_test_repo
           inputSteps:
             - name: p1_step_1
         execution:
