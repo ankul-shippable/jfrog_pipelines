@@ -69,6 +69,8 @@ pipelines:
         configuration:
           inputResources:
             - name: sample_node
+          inputIntegrations:
+            - name: ankul_artifactory
         execution:
           onComplete:
-            - echo true            
+            - printenv            
