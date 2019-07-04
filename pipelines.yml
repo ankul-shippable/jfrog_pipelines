@@ -58,3 +58,41 @@ pipelines:
             - echo printenv
           onComplete:
             - echo true
+            
+      - name: gcloud_pull
+        type: Bash
+        configuration:
+          nodePool: ankul_u16
+          runtime:
+            type: image
+            image:
+              custom:
+                name: ankul/u16all
+                tag: master
+                registry: ankul_gcloud
+          inputSteps:
+            - name: trigger_step
+        execution:
+          onExecute:
+            - echo printenv
+          onComplete:
+            - echo true 
+            
+      - name: artifactory_pull
+        type: Bash
+        configuration:
+          nodePool: ankul_u16
+          runtime:
+            type: image
+            image:
+              custom:
+                name: ankul/u16all
+                tag: master
+                registry: ankul_artifactory
+          inputSteps:
+            - name: trigger_step
+        execution:
+          onExecute:
+            - echo printenv
+          onComplete:
+            - echo true             
