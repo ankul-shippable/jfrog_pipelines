@@ -8,7 +8,7 @@ resources:
 pipelines:
   - name: ankul_pipeline_1  
     steps:
-      - name: p1_step_1
+      - name: trigger_step
         type: Bash
         configuration:
           nodePool: ankul_u16
@@ -19,8 +19,27 @@ pipelines:
         execution:
           onComplete:
             - echo true
- 
-      - name: p1_step_2
+
+      - name: docker_pull
+        type: Bash
+        configuration:
+          nodePool: ankul_u16
+          runtime:
+            type: image
+            image:
+              custom:
+                name: ankul/u16all
+                tag: master
+                registry: ankul_docker
+          inputSteps:
+            - name: trigger_step
+        execution:
+          onExecute:
+            - echo printenv
+          onComplete:
+            - echo true
+
+      - name: aws_pull
         type: Bash
         configuration:
           nodePool: ankul_u16
@@ -33,13 +52,9 @@ pipelines:
                 registry: ankul_aws
                 region: eu-west-2
           inputSteps:
-            - name: p1_step_1
+            - name: trigger_step
         execution:
           onExecute:
-            - local dockerRegistry="ankul_docker"
-            - local userName=$(eval echo "$"int_"$dockerRegistry"_username)
-            - local password=$(eval echo "$"int_"$dockerRegistry"_password)
-            - local url=$(eval echo "$"int_"$dockerRegistry"_url)
-            - retry_command docker login -u "$userName" -p "$password" "$url"
+            - echo printenv
           onComplete:
-            - echo true2
+            - echo true
