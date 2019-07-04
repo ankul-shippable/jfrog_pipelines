@@ -89,6 +89,7 @@ pipelines:
                 name: ankul/u16all
                 tag: master
                 registry: ankul_artifactory
+                sourceRepository: test
           inputSteps:
             - name: trigger_step
         execution:
