@@ -88,7 +88,7 @@ pipelines:
               custom:
                 name: ankul/u16all
                 tag: master
-                registry: art
+                registry: ankul_artifactory
                 sourceRepository: test
           inputSteps:
             - name: trigger_step
