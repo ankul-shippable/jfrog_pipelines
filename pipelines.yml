@@ -18,4 +18,4 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step step..."
-            - add_pipeline_variables imageName="myimage" imageTag="master"
+#             - add_pipeline_variables imageName="myimage" imageTag="master"
