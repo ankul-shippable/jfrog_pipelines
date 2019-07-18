@@ -20,3 +20,4 @@ pipelines:
             - echo "executing test Bash step step..."
 #             - add_pipeline_variables imageName="myimage" imageTag="master"
             - ls $STEP_WORKSPACE_DIR
+            - echo $PIPELINE_ARTIFACT_NAME
