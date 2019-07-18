@@ -20,7 +20,7 @@ pipelines:
             - echo "executing test Bash step..."
             - add_pipeline_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
             - mkdir test_state.txt
-            - add_pipeline_files test_state.txt some_test_file
+            - add_pipeline_files test_state.txt some_test_file.txt
             - ls $pipeline_workspace_dir
             - echo $pipelines_artifact_name
 
