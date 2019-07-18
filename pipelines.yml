@@ -18,6 +18,6 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step step..."
-            - add_pipeline_variables imageName="myimage2" imageTag="master2"
+            - add_pipeline_variables imageName="myimage_$run_number" imageTag="master_$run_number"
             - ls $PIPELINE_WORKSPACE_DIR
             - echo $PIPELINE_ARTIFACT_NAME
