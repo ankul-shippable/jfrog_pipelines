@@ -18,7 +18,7 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
-            - add_pipeline_variables imageName="myimage_$run_number" imageTag="master_$run_number"
+            - add_pipeline_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
             - ls $pipeline_workspace_dir
             - echo $pipelines_artifact_name
 
@@ -31,5 +31,17 @@ pipelines:
           onExecute:
             - echo "executing test Bash step..."
             - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
+            - ls $pipeline_workspace_dir
+            - echo $pipelines_artifact_name
+
+      - name: step_3
+        type:  Bash
+        configuration:
+          inputSteps:
+            - name: step_2
+        execution:
+          onExecute:
+            - echo "executing test Bash step..."
+            - add_pipeline_variables imageName="myimage3_$run_number" imageTag="master3_$run_number"
             - ls $pipeline_workspace_dir
             - echo $pipelines_artifact_name
