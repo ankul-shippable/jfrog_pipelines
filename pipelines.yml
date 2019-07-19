@@ -37,6 +37,8 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
+            - touch $step_workspace_dir/upload/step_test.txt
+            - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
 #             - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
 #             - ls $pipeline_workspace_dir
 #             - echo $pipelines_artifact_name
