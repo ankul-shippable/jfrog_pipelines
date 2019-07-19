@@ -19,6 +19,7 @@ pipelines:
           onExecute:
             - echo "executing test Bash step..."
             - printenv
+            - ls $step_workspace_dir
 #             - add_pipeline_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
 #             - touch test_state.txt
 #             - add_pipeline_files test_state.txt test_state.txt
