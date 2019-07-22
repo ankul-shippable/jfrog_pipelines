@@ -18,7 +18,6 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
-            - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
 
       - name: step_2
         type:  Bash
@@ -28,6 +27,7 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
+            - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
 #             - touch $step_workspace_dir/upload/step_test.txt
 #             - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
 #             - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
