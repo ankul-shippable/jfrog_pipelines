@@ -18,7 +18,7 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
-#             - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
+            - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
 
       - name: step_2
         type:  Bash
