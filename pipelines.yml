@@ -18,16 +18,7 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
-            - printenv
-            - ls $step_workspace_dir
-#             - add_pipeline_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
-#             - touch test_state.txt
-#             - add_pipeline_files test_state.txt test_state.txt
-#             - touch test_state_2.txt
-#             - echo "somekey=somevalue" > test_state_2.txt
-#             - add_pipeline_files test_state_2.txt test_state_2.txt            
-#             - ls $pipeline_workspace_dir
-#             - echo $pipelines_artifact_name
+             - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
 
       - name: step_2
         type:  Bash
@@ -37,8 +28,8 @@ pipelines:
         execution:
           onExecute:
             - echo "executing test Bash step..."
-            - touch $step_workspace_dir/upload/step_test.txt
-            - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
+#             - touch $step_workspace_dir/upload/step_test.txt
+#             - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
 #             - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
 #             - ls $pipeline_workspace_dir
 #             - echo $pipelines_artifact_name
