@@ -1,47 +1,8 @@
-resources:
-  - name: sample_node
-    type:   GitRepo
-    configuration:
-      gitProvider: ankul_github
-      path: ankul-shippable/sample_node
-      branches:
-        include: master
-
 pipelines:
   - name: ankul_pipeline
     steps:
       - name: step_1
         type:  Bash
-        configuration:
-          inputResources:
-            - name: sample_node
         execution:
           onExecute:
             - echo "executing test Bash step..."
-
-      - name: step_2
-        type:  Bash
-        configuration:
-          inputSteps:
-            - name: step_1
-        execution:
-          onExecute:
-            - echo "executing test Bash step..."
-            - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
-#             - touch $step_workspace_dir/upload/step_test.txt
-#             - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
-#             - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
-#             - ls $pipeline_workspace_dir
-#             - echo $pipelines_artifact_name
-
-      - name: step_3
-        type:  Bash
-        configuration:
-          inputSteps:
-            - name: step_2
-        execution:
-          onExecute:
-            - echo "executing test Bash step..."
-#             - add_pipeline_variables imageName="myimage3_$run_number" imageTag="master3_$run_number"
-#             - ls $pipeline_workspace_dir
-#             - echo $pipelines_artifact_name
