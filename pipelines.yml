@@ -19,6 +19,13 @@ pipelines:
           onExecute:
             - echo "executing test Bash step..."
 
+  - name: ankul_pipeline_2
+    configuration:
+      environmentVariables:
+        readOnly:
+          ENV1: value1
+          ENV2: value2
+    steps:
       - name: step_2
         type:  Bash
         configuration:
