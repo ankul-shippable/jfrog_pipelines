@@ -29,8 +29,8 @@ pipelines:
       - name: step_2
         type:  Bash
         configuration:
-          inputSteps:
-            - name: step_1
+          inputResources:
+            - name: sample_node
         execution:
           onExecute:
             - echo "executing test Bash step..."
