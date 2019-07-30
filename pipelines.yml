@@ -17,6 +17,7 @@ pipelines:
             - name: sample_node
         execution:
           onExecute:
+            - printenv
             - echo "executing test Bash step..."
 
   - name: ankul_pipeline_2
@@ -41,6 +42,7 @@ pipelines:
             - name: sample_node
         execution:
           onExecute:
+            - printenv
             - echo "executing test Bash step..."
             - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
 #             - touch $step_workspace_dir/upload/step_test.txt
@@ -56,6 +58,7 @@ pipelines:
             - name: step_2
         execution:
           onExecute:
+            - printenv
             - echo "executing test Bash step..."
 #             - add_pipeline_variables imageName="myimage3_$run_number" imageTag="master3_$run_number"
 #             - ls $pipeline_workspace_dir
