@@ -25,6 +25,14 @@ pipelines:
         readOnly:
           ENV1: value1
           ENV2: value2
+          ENV3: value3
+      runtime:
+        type: image
+        image:
+          custom:
+            name: ankul/u16
+            tag: master
+          
     steps:
       - name: step_2
         type:  Bash
