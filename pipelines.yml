@@ -7,6 +7,12 @@ resources:
       branches:
         include: master
 
+  - name: version
+    type: FileSpec
+    configuration:
+      sourceArtifactory: ankul_artifactory
+      pattern: promote-test/hello
+      
 pipelines:
   - name: ankul_pipeline
     steps:
@@ -20,21 +26,22 @@ pipelines:
             - printenv
             - echo "executing test Bash step..."
             
-  - name: npm
+  - name: docker
     steps:
-      - name: npm_build
-        type:  NpmBuild
+      - name: build_docker_image
+        type: DockerBuild
         configuration:
-          sourceLocation: test
-          repositoryName: test
-          integrations:
-            - name: ankul_artifactory
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: 34.66.107.45:8081/docker-virtual/ankul 
+          dockerImageTag: $pipeline_name.$run_number
           inputResources:
             - name: sample_node
+            - name: version
         execution:
-          onStart:
-            - printenv
-            - echo "executing test Bash step..."            
+          onComplete:
+            - sudo apt-get install tree
+            - tree $run_dir/workspace        
 
   - name: ankul_pipeline_2
     configuration:
