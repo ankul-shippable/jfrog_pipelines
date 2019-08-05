@@ -27,6 +27,8 @@ pipelines:
         configuration:
           sourceLocation: test
           repositoryName: test
+          integrations:
+            - name: ankul_artifactory
           inputResources:
             - name: sample_node
         execution:
