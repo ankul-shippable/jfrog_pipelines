@@ -45,11 +45,11 @@ pipelines:
             - printenv
             - echo "executing test Bash step..."
             - add_run_variables imageName="myimage1_$run_number" imageTag="master1_$run_number"
-#             - touch $step_workspace_dir/upload/step_test.txt
-#             - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
-#             - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
-#             - ls $pipeline_workspace_dir
-#             - echo $pipelines_artifact_name
+            - touch $step_workspace_dir/upload/step_test.txt
+            - echo "someStepKey=somevalue" > $step_workspace_dir/upload/step_test.txt
+            - add_pipeline_variables imageName="myimage2_$run_number" imageTag="master2_$run_number"
+            - ls $pipeline_workspace_dir
+            - echo $pipelines_artifact_name
 
       - name: step_3
         type:  Bash
