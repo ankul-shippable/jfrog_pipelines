@@ -25,10 +25,12 @@ pipelines:
       - name: npm_build
         type:  NpmBuild
         configuration:
+          sourceLocation: test
+          repositoryName: test
           inputResources:
             - name: sample_node
         execution:
-          onExecute:
+          onStart:
             - printenv
             - echo "executing test Bash step..."            
 
