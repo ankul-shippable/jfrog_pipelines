@@ -37,9 +37,9 @@ pipelines:
     steps:
       - name: step_2
         type:  Bash
-#         configuration:
-#           inputResources:
-#             - name: sample_node
+        configuration:
+          inputResources:
+            - name: sample_node
         execution:
           onExecute:
             - printenv
