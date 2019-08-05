@@ -19,6 +19,18 @@ pipelines:
           onExecute:
             - printenv
             - echo "executing test Bash step..."
+            
+  - name: npm
+    steps:
+      - name: npm_build
+        type:  NpmBuild
+        configuration:
+          inputResources:
+            - name: sample_node
+        execution:
+          onExecute:
+            - printenv
+            - echo "executing test Bash step..."            
 
   - name: ankul_pipeline_2
     configuration:
