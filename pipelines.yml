@@ -7,11 +7,11 @@ resources:
       branches:
         include: master
 
-  - name: version
-    type: FileSpec
-    configuration:
-      sourceArtifactory: ankul_artifactory
-      pattern: promote-test/hello
+#   - name: version
+#     type: FileSpec
+#     configuration:
+#       sourceArtifactory: ankul_artifactory
+#       pattern: promote-test/hello
       
 pipelines:
   - name: ankul_pipeline
@@ -37,7 +37,7 @@ pipelines:
           dockerImageTag: $pipeline_name.$run_number
           inputResources:
             - name: sample_node
-            - name: version
+#             - name: version
         execution:
           onComplete:
             - docker images       
