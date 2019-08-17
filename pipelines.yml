@@ -6,12 +6,6 @@ resources:
       path: ankul-shippable/sample_node
       branches:
         include: master
-
-#   - name: version
-#     type: FileSpec
-#     configuration:
-#       sourceArtifactory: ankul_artifactory
-#       pattern: promote-test/hello
       
 pipelines:
   - name: ankul_pipeline
@@ -24,23 +18,7 @@ pipelines:
         execution:
           onExecute:
             - printenv
-            - echo "executing test Bash step..."
-            
-  - name: docker
-    steps:
-      - name: build_docker_image
-        type: DockerBuild
-        configuration:
-          dockerFileLocation: .
-          dockerFileName: Dockerfile
-          dockerImageName: 34.66.107.45:8081/docker-virtual/ankul 
-          dockerImageTag: $pipeline_name.$run_number
-          inputResources:
-            - name: sample_node
-#             - name: version
-        execution:
-          onComplete:
-            - docker images       
+            - echo "executing test Bash step..."               
 
   - name: ankul_pipeline_2
     configuration:
