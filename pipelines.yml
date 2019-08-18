@@ -26,6 +26,12 @@ pipelines:
         type:  Bash
         configuration:
           nodePool: on-demand-nodes
+          runtime:
+            type: image
+            image:
+              custom:
+                name: ankul/u16
+                tag: master
           inputResources:
             - name: sample_node
         execution:
