@@ -44,9 +44,15 @@ pipelines:
             - name: sample_node
         execution:
           onExecute:
-            - printenv
-            - sleep 60
-            - echo "executing test Bash step..."                
+            - sudo printenv
+            - sudo echo 1
+            - sudo echo 2
+            - sudo echo 3 
+            - sudo echo 1b
+            - sudo echo 2b
+            - sudo echo 3b             
+            - sudo sleep 60
+            - sudo echo "executing test Bash step..."  
 
   - name: ankul_pipeline_2
     configuration:
