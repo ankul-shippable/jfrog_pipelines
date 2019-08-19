@@ -37,9 +37,13 @@ pipelines:
           runtime:
             type: image
             image:
-              custom:
-                name: ankul/u16
-                tag: master
+              auto:
+                language: nodejs
+                versions:
+                  - 10.15.2
+#               custom:
+#                 name: ankul/u16
+#                 tag: master
 #                 autoPull: false
           inputResources:
             - name: sample_node
