@@ -40,7 +40,7 @@ pipelines:
               auto:
                 language: nodejs
                 versions:
-                  - 10.15.2
+                  - 10.15.3
 #               custom:
 #                 name: ankul/u16
 #                 tag: master
