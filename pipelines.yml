@@ -33,13 +33,14 @@ pipelines:
       - name: step_1
         type:  Bash
         configuration:
-          nodePool: on-demand-nodes-c7
+          nodePool: on-demand-nodes-u18
           runtime:
             type: image
             image:
               custom:
-                name: ankul/u16
-                tag: master
+#                 name: ankul/u16
+#                 tag: master
+                autoPull: false
           inputResources:
             - name: sample_node
         execution:
