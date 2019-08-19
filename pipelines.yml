@@ -33,7 +33,7 @@ pipelines:
       - name: step_1
         type:  Bash
         configuration:
-          nodePool: on-demand-nodes-u18
+          nodePool: on-demand-nodes-c7
           runtime:
             type: image
             image:
