@@ -19,7 +19,7 @@ pipelines:
             image:
               custom:
                 name: ankul/u16
-                tag: master          
+                tag: master
           inputResources:
             - name: sample_node
         execution:
@@ -38,13 +38,14 @@ pipelines:
             type: image
             image:
               custom:
-#                 name: ankul/u16
-#                 tag: master
-                autoPull: false
+                name: ankul/u16
+                tag: master
+#                 autoPull: false
           inputResources:
             - name: sample_node
         execution:
           onExecute:
+            - docker images
             - sudo printenv
             - sudo echo 1
             - sudo echo 2
