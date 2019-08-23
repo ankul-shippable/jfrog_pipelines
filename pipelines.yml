@@ -81,7 +81,6 @@ pipelines:
           nodePool: u16_nodes
           inputResources:
             - name: sample_node
-              trigger: false
         execution:
           onExecute:
             - printenv
