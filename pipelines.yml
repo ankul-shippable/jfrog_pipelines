@@ -78,7 +78,7 @@ pipelines:
       - name: step_2
         type:  Bash
         configuration:
-          nodePool: on-demand-nodes
+          nodePool: u16_nodes
           inputResources:
             - name: sample_node
               trigger: false
@@ -97,7 +97,7 @@ pipelines:
       - name: step_3
         type:  Bash
         configuration:
-          nodePool: on-demand-nodes
+          nodePool: u16_nodes
           inputSteps:
             - name: step_2
         execution:
